@@ -1,0 +1,138 @@
+
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.drawer {
+  background: rgba(245, 248, 250, 0.85);
+}
+
+#control-panel {
+	position: fixed;
+	z-index: 9;
+	top: 0;
+  	bottom: 0;
+	right: 0;
+  	overflow-x: hidden;
+  	overflow-y: auto;
+  	height: 100%;
+  	width: 230px;
+  	background: rgba(31, 33, 34, 0); 
+}
+
+.app-title {
+
+	text-align: center;
+    padding: 5px 0px;
+}
+
+.info-box {
+	margin-left:16px;
+  margin-top:4px;
+  text-align: center;
+}
+
+.info-lines {
+  margin-left: 5px;
+  font-size: 12px;
+  line-height: 1.0;
+}
+
+.values {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.stats {
+  margin-top: 10px;
+  color:black;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.panelSwitch {
+  margin-left:16px;
+}
+
+.agentRadio label.bp3-control.bp3-radio.bp3-inline {
+  margin-right: 9px
+}
+
+.agentRadio {
+  margin-top:20px;
+  margin-left:16px;
+}
+
+
+.cpanel-visible {
+  visibility: visible;
+  pointer-events: none;
+
+}
+
+.cpanel-hide {
+  visibility: hidden;
+}
+
+
+.app-panel,
+.control-panel,
+.cpanel-visible
+{
+  pointer-events: none;
+}
+
+
+#progressbar {
+  display:inline-block;
+  opacity: 0.65;
+  width: 80px;
+  margin: auto;
+  background-color: black;
+  border-radius: 6px;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+}
+
+#progressbar>div {
+  background-color: rgb(152, 204, 123);
+  width: 0%;
+  /* Adjust with JavaScript */
+  height: 10px;
+  border-radius: 3px;
+}
+
+#mortar-icon {
+  display:inline-block;
+  margin-left: 4px;
+}
+

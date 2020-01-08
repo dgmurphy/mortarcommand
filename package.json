@@ -1,0 +1,47 @@
+{
+  "name": "mortar-command",
+  "author": "Doug Murphy",
+  "description": "Terrain-based sim/game environment using Babylon.js",
+  "version": "0.1.0",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "@babylonjs/core": "^4.0.3",
+    "@babylonjs/gui": "^4.0.3",
+    "@babylonjs/loaders": "^4.0.3",
+    "react": "^16.8.3",
+    "react-autobind": "^1.0.6",
+    "react-dom": "^16.8.3",
+    "react-scripts": "2.1.5"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build-web": "react-scripts build",
+    "build": "npm run build-web && build --win",
+    "build-portable": "npm run build-web && build --win portable"
+  },
+  "build": {
+    "asar": true,
+    "appId": "com.douglasgmurphy.tbox",
+    "copyright": "MIT",
+    "productName": "babylon-terrain-box",
+    "win": {
+      "icon": "public/icon.png",
+      "publisherName": ""
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

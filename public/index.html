@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Mortar Command</title>
+    <!--<script src=https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js></script>-->
+    
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+  
+      #loading-graphics {
+        background-color:#222222;
+        
+        position:absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        height:100%;
+        width:100%;
+        z-index:10;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+      }
+
+
+      .logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+      }
+  
+  
+      .loading-progress {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin: auto;
+        text-align: center;
+        line-height: 22px;
+        
+      }
+
+  
+      .insert-coin {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin: auto;
+        text-align: center;
+        cursor: pointer;
+        visibility: hidden;
+        background-color: #111111;
+        width: 270px;
+        height: 40px;
+        line-height: 40px;
+        border: 2px solid #b4ff00;
+        border-radius: 6px;
+      }
+      
+
+      .test-audio {
+        display: inline-block;
+        cursor: pointer;
+        background-color: #000000;
+        width: 70px;
+        height: 22px;
+        line-height: 19px;
+        text-align: center;
+        border: 2px solid #b4ff00;
+        border-radius: 4px;    
+        font-size: 11px;    
+        box-sizing: border-box;
+        margin-top: 10px;
+        visibility: hidden;
+        position: relative;
+        top: -4px;
+        color:white;
+      }
+
+      .test-audio:hover {
+        border: 2px solid yellow;
+        background-color: #333333;
+      }
+
+      .centered {
+        width:100%;
+        margin: 0 auto auto auto;
+        background: linear-gradient(180deg, rgb(50,50,50) 0%, rgb(150,150,150) 100%);
+
+      }
+
+      .title {
+        color: black;
+        font-weight: bold;
+        text-align: end;
+      }
+
+
+
+      .lower {
+        font-size: 14px;
+        width:75%;
+        height: 380px;
+        margin: 30px auto 0 auto;
+      }
+
+      #footer {
+        
+        width: 100%;
+        color: grey;
+      }
+
+      .footer-content {
+        width: 65%;
+        margin: 18px auto;
+        font-size:12px;
+        line-height: 14px;
+      }
+
+      .divTable{
+        display: table;
+        width: 100%;
+        justify-content:center;
+      }
+      .divTableRow {
+        display: table-row;
+      }
+  
+      .divTableCell, .divTableHead {
+        /*border: 1px solid #999999;*/
+        display: table-cell;
+        padding: 3px 10px;
+        vertical-align: top;
+      }
+      .divTableBody {
+        display: table-row-group;
+      }
+
+
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46770771-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-46770771-3');
+    </script>
+
+  
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="loading-graphics">
+      
+       
+        <div class="centered">
+
+          <div class="upper">
+            <br>
+            <img src="./textures/mc150.png" alt="logo" class="logo">
+            <br>
+            <div class="loading-progress" id="loading">
+              
+              <div id="loading-text">
+                <span id="loading-span" style="margin-right: 12px;">Loading... </span>
+                <img width="18px" src="./textures/loading_spinner.gif"/>
+              </div>
+            
+              <div class="insert-coin" id="start">
+                  INSERT COIN
+              </div>
+
+            </div>
+          
+        </div> <!-- upper -->
+
+        <div class="lower">
+
+            <div class="divTable">
+                <div class="divTableBody">
+                  <div class="divTableRow">
+                    <div class="divTableCell"><img src="./textures/hex1.png" width=80/></div>
+                    <div class="divTableCell"><span class="title">Browser:</span></div>
+                    <div class="divTableCell">Requires Google Chrome. <br>Make your 
+                      browser window smaller to improve the game framerate.
+                    </div>
+                  </div>
+                <div class="divTableRow">
+                  <div class="divTableCell"><img src="./textures/hex2.png" width=80/></div>
+                  <div class="divTableCell"><span class="title">Game Play:</span></div>
+                  <div class="divTableCell">Enemy bots are trying to sabotage your power stations. 
+                      If the bots add 12 kilograms of radioactive ore to a station core, the core will 
+                      exceed critical mass and start a fission chain reaction. 
+                      <b>Destroy the bots before they transport the ore to your power stations.</b></div>
+                </div>
+                <div class="divTableRow">
+                  <div class="divTableCell"><img src="./textures/hex3.png" width=80/></div>
+                  <div class="divTableCell"><span class="title">Controls:</span></div>
+                  <div class="divTableCell"><b>Z-key or M-key:</b> guns & mortars<br>
+                    <b>Space bar:</b> heavy mortar (when enabled)<br>
+                    <b>Mouse pointer:</b> weapon target<br></div>
+                </div>
+                <div class="divTableRow">
+                  <div class="divTableCell"> <img src="./textures/hex4.png" width=80/></div>
+                  <div class="divTableCell"><span class="title">Audio Check:</span></div>
+                  <div class="divTableCell"><div class="test-audio" id="sound-check">TEST</div></div>
+                </div>
+              </div>
+            </div>
+
+          
+
+          </div> <!-- lower-->
+
+        </div> <!-- centered -->
+       
+
+      <footer id="footer">
+          <div class="footer-content">
+             
+
+
+                <div>
+                    <div style="float: left; width: 75%; margin-right:10px;">
+                      <b>Acknowledgements:</b> 
+                      Terrain mesh by Devin Lugent. 
+                      React-BabylonJS boilerplate by blurymind. Sound effects from 
+                      freesound.org: [eardeer, EdgardEdition, FxKid2, man, arnaljl, PRIM_ORDial] 
+                    </div>
+                    <div style="float: left; width:50px;">
+                        <a href="https://www.instagram.com/mortarcommander/" target="_blank">  
+                          <img src="./textures/insta.png" alt="insta"/>
+                        </a>
+                    </div>
+                    <div style="float: left; width:50px">
+                        <a href="https://github.com/dgmurphy/tbox_v2" target="_blank">  
+                          <img src="./textures/github.png" alt="github" />
+                        </a>
+                    </div>
+                    <br style="clear: left;" />
+                </div>
+
+             
+        </div>
+      </footer>
+
+    </div> <!--loading graphics-->
+  
+  </body>
+</html>
+
+
