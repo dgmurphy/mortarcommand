@@ -23,7 +23,7 @@ bit of a hassle because the input obj has some very odd scaling and position val
 re-exported the obj as STL to make sure the corrected vertex values were baked in before
 re-exporting as gltf.
 
-Once loaded into the Babylon scene,  the scaling needed to be fized due to the BJS
+Once loaded into the Babylon scene,  the scaling needed to be fixed due to the BJS
 handed coordinate system. The normals had to be flipped also.  All the other objects
 are BJS primitives from the provided polyhedra examples.
 
