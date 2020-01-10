@@ -127,8 +127,28 @@
       .lower {
         font-size: 14px;
         width:75%;
-        height: 380px;
+        padding-bottom: 15px;
         margin: 30px auto 0 auto;
+      }
+
+      .more {
+        color: black;
+        background-color: #91b142;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+      }
+
+      .more-content {
+        width:35%;
+        margin: auto;
+        padding: 10px 0 10px 0;
+      }
+
+      .edition-label {
+        float: left;
+        text-align: end;
+        margin-right: 8px;
+        font-size: 14px
       }
 
       #footer {
@@ -162,6 +182,34 @@
       .divTableBody {
         display: table-row-group;
       }
+
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 160px;
+      background-color: black;
+      opacity: 50%;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      font-size: 12px;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 100;
+      top: -5px;
+      left: 105%
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
 
 
     </style>
@@ -209,14 +257,14 @@
             <div class="divTable">
                 <div class="divTableBody">
                   <div class="divTableRow">
-                    <div class="divTableCell"><img src="./textures/hex1.png" width=80/></div>
+                    <div class="divTableCell"><img src="./textures/hex1.png" width=70/></div>
                     <div class="divTableCell"><span class="title">Browser:</span></div>
                     <div class="divTableCell">Requires Google Chrome. <br>Make your 
                       browser window smaller to improve the game framerate.
                     </div>
                   </div>
                 <div class="divTableRow">
-                  <div class="divTableCell"><img src="./textures/hex2.png" width=80/></div>
+                  <div class="divTableCell"><img src="./textures/hex2.png" width=70/></div>
                   <div class="divTableCell"><span class="title">Game Play:</span></div>
                   <div class="divTableCell">Enemy bots are trying to sabotage your power stations. 
                       If the bots add 12 kilograms of radioactive ore to a station core, the core will 
@@ -224,24 +272,41 @@
                       <b>Destroy the bots before they transport the ore to your power stations.</b></div>
                 </div>
                 <div class="divTableRow">
-                  <div class="divTableCell"><img src="./textures/hex3.png" width=80/></div>
+                  <div class="divTableCell"><img src="./textures/hex3.png" width=70/></div>
                   <div class="divTableCell"><span class="title">Controls:</span></div>
                   <div class="divTableCell"><b>Z-key or M-key:</b> guns & mortars<br>
                     <b>Space bar:</b> heavy mortar (when enabled)<br>
                     <b>Mouse pointer:</b> weapon target<br></div>
                 </div>
                 <div class="divTableRow">
-                  <div class="divTableCell"> <img src="./textures/hex4.png" width=80/></div>
+                  <div class="divTableCell"> <img src="./textures/hex4.png" width=70/></div>
                   <div class="divTableCell"><span class="title">Audio Check:</span></div>
                   <div class="divTableCell"><div class="test-audio" id="sound-check">TEST</div></div>
                 </div>
               </div>
             </div>
 
-          
-
           </div> <!-- lower-->
 
+
+          <div class="more">
+            <div class="more-content">
+              <div class="edition-label">
+                <b>Try the<br />Aleutian Range<br>Edition: </b>
+              </div>
+          
+              <div class="tooltip">
+                <a href="http://mortarcommand.com/alaska">
+                  <img width='80px' src="./textures/alaska-tn.png" onmouseover="this.src='./textures/alaska-tn-ro.png'"
+                    onmouseout="this.src='./textures/alaska-tn.png'" border="0" alt="" />
+                </a>
+                <span class="tooltiptext">
+                  Scenic but challenging, just like Alaska!
+                </span>
+              </div>
+          
+            </div> <!-- more content-->
+          </div> <!-- more -->
         </div> <!-- centered -->
        
 
