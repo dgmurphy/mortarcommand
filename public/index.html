@@ -139,9 +139,9 @@
       }
 
       .more-content {
-        width:35%;
+        width:60%;
         margin: auto;
-        padding: 10px 0 10px 0;
+        padding: 10px 10px 10px 0;
       }
 
       .edition-label {
@@ -187,6 +187,7 @@
     .tooltip {
       position: relative;
       display: inline-block;
+      padding-left:16px;
     }
 
     .tooltip .tooltiptext {
@@ -197,14 +198,14 @@
       color: #fff;
       text-align: center;
       border-radius: 6px;
-      padding: 5px 0;
+      padding: 5px 5px 5px 5px;
       font-size: 12px;
 
       /* Position the tooltip */
       position: absolute;
       z-index: 100;
-      top: -5px;
-      left: 105%
+      top: -85%;
+      left: 5px;
     }
 
     .tooltip:hover .tooltiptext {
@@ -292,7 +293,7 @@
           <div class="more">
             <div class="more-content">
               <div class="edition-label">
-                <b>Try the<br />Aleutian Range<br>Edition: </b>
+                <b>Try the other <br>Mortar Command <br>Editions:</b>
               </div>
           
               <div class="tooltip">
@@ -301,10 +302,21 @@
                     onmouseout="this.src='./textures/alaska-tn.png'" border="0" alt="" />
                 </a>
                 <span class="tooltiptext">
-                  Scenic but challenging, just like Alaska!
+                  Aleutian Range terrain. Scenic but challenging, just like Alaska!
                 </span>
               </div>
-          
+
+              <div class="tooltip">
+                <a href="http://mortarcommand.com/andes">
+                  <img width='80px' src="./textures/cerro-tn.png" onmouseover="this.src='./textures/cerro-tn-ro.png'"
+                    onmouseout="this.src='./textures/cerro-tn.png'" border="0" alt="" />
+                </a>
+                <span class="tooltiptext">
+                  Andes mountains, at the foot of Cerro El C&oacute;ndor volcano.
+                </span>
+              </div>
+
+
             </div> <!-- more content-->
           </div> <!-- more -->
         </div> <!-- centered -->
