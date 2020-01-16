@@ -548,9 +548,9 @@ function killAgent(agent, scene) {
   const idx = scene.agents.findIndex( hasName )
 
   if(idx > -1) {
-    scene.agents[idx].meshes.body.dispose()
-    scene.agents[idx].meshes.particles.dispose()
-    scene.agents[idx].meshes.cargo.dispose()
+    //scene.agents[idx].meshes.body.dispose()
+    //scene.agents[idx].meshes.particles.dispose()
+    //scene.agents[idx].meshes.cargo.dispose()
     scene.agents.splice(idx, 1)    
   }
 
