@@ -76,7 +76,7 @@ export function loadAssets(scene, updateAssetStatus) {
 
 
     /* ------ terrain load ------------ */
-    var terrainTask = assetsManager.addMeshTask("terrainLoadTask", "", "./", "ntc_and_skirt.gltf")
+    var terrainTask = assetsManager.addMeshTask("terrainLoadTask", "", "./", "NTC_Draco.gltf")
 
     terrainTask.onSuccess = function(task) {
 
@@ -88,9 +88,9 @@ export function loadAssets(scene, updateAssetStatus) {
       // bjs is left handed coords, gltf is right handed
       newMeshes[0].scaling = new  BABYLON.Vector3(1, 1, -1);  
       //Looks like mesh 0 is the base box
-      newMeshes[0].scaling = new  BABYLON.Vector3(1.88, 5.55, -1.88);
+      newMeshes[0].scaling = new  BABYLON.Vector3(50, 100, -50);
       newMeshes[0].addRotation(0, Math.PI, 0);
-      newMeshes[0].position = new  BABYLON.Vector3(-.1, 3, 0.55)
+      newMeshes[0].position = new  BABYLON.Vector3(-25, 2.5, 14.6)
 
       var terrain = newMeshes[1]
       terrain.updateFacetData();
