@@ -10,6 +10,7 @@ import { addRound, addThePackage } from './agent.js'
 import { makeBase} from './station.js'
 import { MAX_ROUNDS } from './constants.js'
 import { addPowerStations } from './station.js'
+import { addMine } from './mines.js';
 
 
 export default class BabylonScene extends Component { 
@@ -66,6 +67,9 @@ export default class BabylonScene extends Component {
     
     // stations
     addPowerStations(scene)
+
+    // mines
+    addMine(scene)
 
     // agents
     startAgentAnim(scene, this.props.handleUpdateGUIinfo)

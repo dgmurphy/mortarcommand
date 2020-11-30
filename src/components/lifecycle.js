@@ -4,6 +4,7 @@ import { addPowerStations, addPowerStation, placePowerStations,
             removeStationWreckage } from './station.js'
 import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES,
          TERRAIN_MESH_NAME } from './constants.js'
+import { placeMines } from './mines.js'
 
 
 export function handleLevelComplete(scene) {
@@ -109,6 +110,8 @@ export function addLevelControl(scene) {
            for the raycasting to work properly. Update station
            locations here for this reason */
         placePowerStations(scene)
+        placeMines(scene)
+        
 
         scene.gameStarted = true
     }

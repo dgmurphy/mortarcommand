@@ -101,7 +101,7 @@ export function loadAssets(scene, updateAssetStatus) {
         vertex_data.normals[i] *= -1;
       }
 
-      vertex_data.applyToMesh(terrain);
+      //vertex_data.applyToMesh(terrain);
 
       terrain.computeWorldMatrix(true); 
 

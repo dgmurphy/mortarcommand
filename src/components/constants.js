@@ -120,11 +120,11 @@ export const phases = {
 
 export const ARTIFACT_TYPES = {
     small: { mass: 1, scale: 0.6 },
-    medium: { mass: 4, scale: 1 },
-    large: { mass: 7, scale: 1.5}
+    medium: { mass: 2, scale: 1 },
+    large: { mass: 3, scale: 1.5}
 }
 export const ARTIFACT_SIZE = 1
-export const ARTIFACT_MAX_HEALTH = 60
+export const ARTIFACT_MAX_HEALTH = 20
 export const ARTIFACT_INTERACT_COEFF = 1.5
 export const ARTIFACT_ZONE_LINE = -12.5
 export const ARTIFACT_AREA = {

@@ -188,7 +188,7 @@ export function addPowerStations(scene) {
     addPowerStation(scene, 12,-8, 3)
 }
 
-// TODO remove the position codes in the makePowerstations call
+
 export function placePowerStations(scene)  {
 
     for ( var station of scene.powerStations ) {

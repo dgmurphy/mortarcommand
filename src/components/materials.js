@@ -2,6 +2,10 @@ import * as BABYLON from '@babylonjs/core';
 
 export function createMaterials(scene) {
 
+    let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);
+    mineCoreMat.diffuseColor =  new BABYLON.Color3(.9,0.4,0.05)
+    mineCoreMat.emissiveColor = new BABYLON.Color3.Gray()
+
     let blastMat = new BABYLON.StandardMaterial("blastMat", scene);
     blastMat.diffuseColor =  new BABYLON.Color3(1,.97,.67)
     //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)

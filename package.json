@@ -6,9 +6,9 @@
   "homepage": "",
   "private": true,
   "dependencies": {
-    "@babylonjs/core": "^4.0.3",
-    "@babylonjs/gui": "^4.0.3",
-    "@babylonjs/loaders": "^4.0.3",
+    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/gui": "^4.2.0",
+    "@babylonjs/loaders": "^4.2.0",
     "react": "^16.8.3",
     "react-autobind": "^1.0.6",
     "react-dom": "^16.8.3",
