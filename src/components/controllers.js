@@ -43,6 +43,13 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
             station.shell.rotate(BABYLON.Axis.Y, spinSpeed, BABYLON.Space.LOCAL)
         }
 
+        // animator activators
+        for (var activator of scene.activators) {
+            let spinSpeed = .02
+            activator.rotator.rotate(BABYLON.Axis.Y, spinSpeed, BABYLON.Space.LOCAL)
+        }
+
+
         // Check for mode change on interval (higher interval => better perf)
         var agent
         if (modeCheckCounter === modeCheckThresh) {

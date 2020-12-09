@@ -2,6 +2,23 @@ import * as BABYLON from '@babylonjs/core';
 
 export function createMaterials(scene) {
 
+    var activatorbasemat = new BABYLON.StandardMaterial("activatorbasemat", scene);
+    activatorbasemat.diffuseColor = new BABYLON.Color4(.2,.2,.2,1)
+
+    var activatorbaseconemat_1 = new BABYLON.StandardMaterial("activatorbaseconemat_1", scene);
+    activatorbaseconemat_1.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+
+    var activatorbaseconemat_2 = new BABYLON.StandardMaterial("activatorbaseconemat_2", scene);
+    activatorbaseconemat_2.diffuseColor = new BABYLON.Color3(0.82, 1, 0.46);
+
+    var activatorbaseconemat_3 = new BABYLON.StandardMaterial("activatorbaseconemat_3", scene);
+    activatorbaseconemat_3.diffuseColor = new BABYLON.Color3(1, 1, 0);
+
+    var holomat = new BABYLON.StandardMaterial("holomat", scene);
+    holomat.backFaceCulling = false;
+    holomat.alpha = 0.25
+    holomat.emissiveColor = new BABYLON.Color3(0, .1, .4);
+ 
     let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);
     mineCoreMat.diffuseColor =  new BABYLON.Color3(1,1,.6)
     mineCoreMat.emissiveColor = new BABYLON.Color3(.1,.1,.1)
@@ -23,8 +40,6 @@ export function createMaterials(scene) {
     mineBlastMat.diffuseColor =  new BABYLON.Color3(1,.17,.97)
     //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
     mineBlastMat.alpha = 0.3
-
-
 
     let psPylonsMat = new BABYLON.StandardMaterial("stationPylons_Lit", scene);
     psPylonsMat.diffuseColor =  new BABYLON.Color3(1,1,1)

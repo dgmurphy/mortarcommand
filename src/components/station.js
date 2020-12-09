@@ -67,7 +67,7 @@ function makePowerStation(name, scene) {
     innerCore.parent = core
 
     /* animation */
-    BABYLON.Animation.AllowMatricesInterpolation = true
+    
     var animationCore = new BABYLON.Animation(name + "_stationAnim", 
         "material.emissiveColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, 
         BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE)

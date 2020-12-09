@@ -5,6 +5,7 @@ import { addPowerStations, addPowerStation, placePowerStations,
 import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES,
          TERRAIN_MESH_NAME } from './constants.js'
 import { deployMines, placeMines, clearMines } from './mines.js'
+import { addActivator } from './activators.js'
 
 
 export function handleLevelComplete(scene) {
@@ -251,6 +252,19 @@ function handleDebug(e) {
         console.log("DEBUG: " + e.which)
     }
 
+    if ( (e.which === 65) && (e.altKey) ) {
+        deployActivator(e)
+        console.log("DEBUG: " + e.which)
+    }
+
+
+
+}
+
+function deployActivator(e) {
+    var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
+    var scene = c.bjsScene
+    addActivator(scene)
 }
 
 

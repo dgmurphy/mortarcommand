@@ -66,6 +66,7 @@ export default class Viewer extends Component {
         scene.gameStarted  = false
         scene.packagePoints = 0
         scene.mines = []
+        scene.activators = []
         
         engine.runRenderLoop(() => {
             if (scene) {
