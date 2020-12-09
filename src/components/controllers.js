@@ -9,6 +9,7 @@ import { randomSteerMotivator, seekZoneMotivator, locateArtifactMotivator,
 import { setModeInputs } from './mode-utils.js'
 import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
+import { updateMines } from './mines.js';
 
 
 
@@ -31,6 +32,7 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
 
         updateRounds(scene)
         updateThePackage(scene)
+        updateMines(scene)
 
         // TODO only check if there are any agents in the artifact zone
         detectArtifacts(scene)

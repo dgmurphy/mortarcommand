@@ -521,7 +521,7 @@ function renderFireTarget(scene, minRange) {
 }
 
 
-function killArtifact(artifact, scene) {
+export function killArtifact(artifact, scene) {
 
   const hasName = (obj) => obj.name === artifact.name
   const idx = scene.artifacts.findIndex( hasName )
@@ -541,7 +541,7 @@ function killArtifact(artifact, scene) {
 }
 
 
-function killAgent(agent, scene) {
+export function killAgent(agent, scene) {
 
   destroyAgent(agent, scene)
   const hasName = (obj) => obj.name === agent.name
@@ -560,7 +560,7 @@ function killAgent(agent, scene) {
 
 }
 
-function updateAgentColor(agent, scene) {
+export function updateAgentColor(agent, scene) {
 
   agent.meshes.body.material = getAgentMat(scene, agent.health)
 
@@ -571,7 +571,7 @@ function updateAgentColor(agent, scene) {
 
 }
 
-function updateArtifactColor(artifact, scene) {
+export function updateArtifactColor(artifact, scene) {
 
   let h = artifact.health
   let minorDamage = ARTIFACT_MAX_HEALTH * (2/3)

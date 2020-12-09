@@ -1,26 +1,26 @@
 export const GAME_LEVELS = [
     { // level 1
-      agents: [10, 50, 90],   // initial health values   
+      agents: [10, 50, 90, 90, 90, 90, 90],   // initial health values   
       artifacts: { small: 1, med: 1, large: 2 },
       tip: "Tip: If things are moving a bit slowly, \nmake your browser window smaller."  
     },        
     {  // level 2
-        agents: [10, 30, 70, 100],
+        agents: [10, 30, 70, 90, 100],
         artifacts: { small: 2, med: 1, large: 2},
         tip: "Tip: Some bots are stronger than others."
     },    
     {  // level 3
-        agents: [10, 20, 30, 40, 75, 100],
+        agents: [10, 40, 60, 90, 95, 100],
         artifacts: { small: 2, med: 2, large: 3},
         tip: "Tip: Destroy ore deposits to delay the bots."
     },    
     {  // level 4
-        agents: [10, 30, 50, 70, 80, 90, 100],
+        agents: [10, 30, 50, 70, 80, 90, 100, 100, 100],
         artifacts: { small: 2, med: 2, large: 3},
         tip: "Tip: When the green progress bar is full\nyour heavy mortar is ready (space-bar)"
     },    
     {  // level 5
-        agents: [1,1,1,10,10,10,10,10,10, 30, 80, 90],
+        agents: [1,1,1,10,10,10,10,10,10, 30, 80, 90, 100, 100, 100],
         artifacts: { small: 2, med: 2, large: 3},
         tip: "Tip: Use mouse buttons to pan/rotate/zoom if you want."
     },    
@@ -30,12 +30,12 @@ export const GAME_LEVELS = [
         tip: "Tip: The closer your mortar detonates to\n a bot, the more damage it does."
     },    
     {  // level 7
-        agents: [10,20,20,20,20,30,30,70,80,90],
+        agents: [10,20,20,20,20,30,30,70,80,90,100, 100],
         artifacts: { small: 2, med: 2, large: 3},
         tip: "Send suggestions to mortarcommander@gmail.com"
     },
     {  // level 8
-        agents: [10,10,10,10,100,100,100],
+        agents: [10,10,10,10,100,100,100, 100, 100, 100],
         artifacts: { small: 2, med: 2, large: 3},
         tip: "Tip: The larger ore deposits do more damage\n to your stations."
     },
@@ -120,8 +120,8 @@ export const phases = {
 
 export const ARTIFACT_TYPES = {
     small: { mass: 1, scale: 0.6 },
-    medium: { mass: 2, scale: 1 },
-    large: { mass: 3, scale: 1.5}
+    medium: { mass: 4, scale: 1 },
+    large: { mass: 8, scale: 1.5}
 }
 export const ARTIFACT_SIZE = 1
 export const ARTIFACT_MAX_HEALTH = 20
@@ -220,3 +220,4 @@ export const PACKAGE_POINTS_THRESH = 12000
 
 //export const TERRAIN_MESH_NAME = "Ntc Import Obj"
 export const TERRAIN_MESH_NAME = "TerrainMesh_primitive0"
+

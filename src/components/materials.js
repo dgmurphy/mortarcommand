@@ -3,13 +3,27 @@ import * as BABYLON from '@babylonjs/core';
 export function createMaterials(scene) {
 
     let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);
-    mineCoreMat.diffuseColor =  new BABYLON.Color3(.9,0.4,0.05)
-    mineCoreMat.emissiveColor = new BABYLON.Color3.Gray()
+    mineCoreMat.diffuseColor =  new BABYLON.Color3(1,1,.6)
+    mineCoreMat.emissiveColor = new BABYLON.Color3(.1,.1,.1)
+
+    let mineRingMat = new BABYLON.StandardMaterial("mineRingMat", scene);
+    mineRingMat.diffuseColor =  new BABYLON.Color3(.25,.25,.25)
+    //mineCoreRed.emissiveColor = new BABYLON.Color3.Red()
+
+    let mineRingLitMat = new BABYLON.StandardMaterial("mineRingLitMat", scene);
+    mineRingLitMat.diffuseColor =  new BABYLON.Color3(1,.2,1)
+    //mineRingLitMat.emissiveColor = new BABYLON.Color3(0.1,0,0.1)
 
     let blastMat = new BABYLON.StandardMaterial("blastMat", scene);
     blastMat.diffuseColor =  new BABYLON.Color3(1,.97,.67)
     //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
     blastMat.alpha = 0.3
+
+    let mineBlastMat = new BABYLON.StandardMaterial("mineBlastMat", scene);
+    mineBlastMat.diffuseColor =  new BABYLON.Color3(1,.17,.97)
+    //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
+    mineBlastMat.alpha = 0.3
+
 
 
     let psPylonsMat = new BABYLON.StandardMaterial("stationPylons_Lit", scene);
