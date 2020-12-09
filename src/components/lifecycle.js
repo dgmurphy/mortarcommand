@@ -4,7 +4,7 @@ import { addPowerStations, addPowerStation, placePowerStations,
             removeStationWreckage } from './station.js'
 import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES,
          TERRAIN_MESH_NAME } from './constants.js'
-import { placeMines } from './mines.js'
+import { deployMines, placeMines, clearMines } from './mines.js'
 
 
 export function handleLevelComplete(scene) {
@@ -22,6 +22,7 @@ export function handleLevelComplete(scene) {
 
 export function handleGameOver(scene, handleUpdateGUIinfo) {
 
+    clearMines(scene)
     scene.gameScores.push(scene.gameScore)
     scene.hiGameScore = Math.max.apply(Math, scene.gameScores)
 
@@ -245,8 +246,22 @@ function handleDebug(e) {
         console.log("DEBUG: " + e.which)
     }
 
+    if ( (e.which === 73) && (e.altKey) ) {
+        replaceMines(e)
+        console.log("DEBUG: " + e.which)
+    }
+
 }
 
+
+function replaceMines(e) {
+
+    var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
+    var scene = c.bjsScene
+    deployMines(scene)
+
+   
+}
 
 function hideTerrain(e) {
 

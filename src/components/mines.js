@@ -6,7 +6,7 @@ import { handleLevelComplete } from './lifecycle.js'
 
 
 const PROXIMITY_RANGES = [6.0, 5.0, 4.0, 3.0]
-const MINE_BLAST_DAMAGE_COEFF = 3
+const MINE_BLAST_DAMAGE_COEFF = 3.5
 const MINE_BLAST_ALPHA = 0.8
 
 // put new mines on the field
@@ -140,6 +140,7 @@ export function updateMines(scene) {
 function detonate(scene, mine) {
 
     console.log("DETONATING " + mine.name)
+    scene.getSoundByName("mine").play()
     mine.detonating = true
     mine.detonationFrame = scene.gameFrame
     mine.blastAge = 0
@@ -367,9 +368,15 @@ export function destroyMine(mine, scene) {
         scene.mines.splice(idx, 1)
     }    
 
-    if (scene.mines.length == 0)
-        deployMines(scene)
+    //if (scene.mines.length == 0)
+    //    deployMines(scene)
 
 }
 
+export function clearMines(scene) {
+
+    for (var mine of scene.mines) {
+        destroyMine(mine, scene)
+    }
+}
 

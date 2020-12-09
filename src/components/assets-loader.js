@@ -74,6 +74,11 @@ export function loadAssets(scene, updateAssetStatus) {
       let agentDestroyedSound = new BABYLON.Sound("agent-destroyed", task.data, scene, soundReady(task))
     }
 
+    var mineSoundTask = assetsManager.addBinaryFileTask("mineSoundTask", "sounds/mine.wav")
+    mineSoundTask.onSuccess = function (task) {
+      let mineSound = new BABYLON.Sound("mine", task.data, scene, soundReady(task))
+    }
+
 
     /* ------ terrain load ------------ */
     var terrainTask = assetsManager.addMeshTask("terrainLoadTask", "", "./", "NTC_Draco.gltf")

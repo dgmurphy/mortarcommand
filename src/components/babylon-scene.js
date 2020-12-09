@@ -70,7 +70,7 @@ export default class BabylonScene extends Component {
 
     // mines
     scene.mineCounter = 1
-    deployMines(scene)
+    //deployMines(scene)
 
     // agents
     startAgentAnim(scene, this.props.handleUpdateGUIinfo)
