@@ -1,5 +1,37 @@
 import * as BABYLON from '@babylonjs/core'
 import { getGroundElevation } from './utils.js'
+import { holomat, iconmat } from './materials.js'
+
+
+const HOLO_ALPHA_MAX = 0.25
+const MAX_AGE = 1500
+var HOLO_ALPHA = 0.3
+const FUSE_TRIGGER = 64
+
+
+export function updateActivatorColor(activator, scene) {
+
+    let f = activator.fusecount
+    let level2 = FUSE_TRIGGER * (2/3)
+    let level1 = FUSE_TRIGGER * (1/3)
+
+    if (f > level2) {
+        activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_4")
+    }
+    else if (f > level1) {
+        activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_3")
+    }
+    else if (f > 0) {
+        activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_2")
+    }
+  
+}
+
+export function activator_activate(activator, scene) {
+    console.log("Activating " + activator.name)
+    destroy_activator(activator, scene)
+}
+
 
 function makeActivator(name, activator_type, scene) {
 
@@ -34,18 +66,16 @@ function makeActivator(name, activator_type, scene) {
     holocone.edgesWidth = 1.5;
     holocone.edgesColor = new BABYLON.Color4(1, 1, 1, 0.25);  
 
-    let holomat = scene.getMaterialByName("holomat")
+    //let holomat = scene.getMaterialByName("holomat")
     holocone.material = holomat
   
-    var iconmat = new BABYLON.StandardMaterial("iconmat", scene);
-    iconmat.emissiveTexture = new BABYLON.Texture("https://raw.githubusercontent.com/dgmurphy/image-repo/master/mines.png", scene);
-    iconmat.backFaceCulling = false;
-    iconmat.opacityTexture = new BABYLON.Texture("https://raw.githubusercontent.com/dgmurphy/image-repo/master/mines.png", scene);
    
     var iconplane = BABYLON.MeshBuilder.CreatePlane("iconplane", {}, scene);
     iconplane.parent = rotator
     
     iconplane.scaling = new BABYLON.Vector3(0.9,.9,.9);
+    
+    let iconmat = scene.getMaterialByName("iconmat")
     iconplane.material = iconmat;
 
     /* animation */
@@ -58,8 +88,54 @@ function makeActivator(name, activator_type, scene) {
     return {
         name: name,
         core: CoT,
-        rotator: rotator
+        fusecone: basecone,
+        fusecount: 0,
+        fusetrigger: FUSE_TRIGGER,
+        rotator: rotator,
+        flickering: false,
+        born_frame: scene.gameFrame
     }
+
+}
+
+function destroy_activator(activator, scene) {
+
+    const hasName = (obj) => obj.name === activator.name
+    const idx = scene.activators.findIndex( hasName )
+
+    if(idx > -1) {
+        scene.activators[idx].core.dispose()
+        scene.activators.splice(idx, 1)
+    }    
+
+}
+
+export function activator_aging(activator, scene) {
+
+    let age = scene.gameFrame - activator.born_frame
+    let alpha_coeff = 1
+
+    if (age > MAX_AGE) {
+        destroy_activator(activator, scene)
+    } else {
+        alpha_coeff = 1 - (age/MAX_AGE)
+    }
+
+    if (activator.flickering) {
+        holomat.alpha = 0
+        iconmat.alpha = 0
+        if (Math.random() > 0.6) {
+            activator.flickering = false  
+        }     
+    } else {
+        holomat.alpha = HOLO_ALPHA * alpha_coeff
+        iconmat.alpha = 1 * alpha_coeff
+        if (Math.random() > 0.98)
+            activator.flickering = true
+    }
+
+
+    
 
 }
 
@@ -72,7 +148,7 @@ export function addActivator(scene) {
     let avator = makeActivator(name, "mines", scene)
 
     const MAX_X = 7
-    const MIN_X = -20
+    const MIN_X = -10
     const MIN_Z = -12
     const MAX_Z = 12
 
@@ -88,4 +164,13 @@ export function addActivator(scene) {
 
     scene.activators.push(avator)
     scene.activatorCounter += 1
+}
+
+export function clearActivators(scene) {
+
+    let activators = scene.activators
+
+    for (var a of activators) {
+        destroy_activator(a, scene)
+    }
 }

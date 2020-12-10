@@ -5,7 +5,7 @@ import { addPowerStations, addPowerStation, placePowerStations,
 import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES,
          TERRAIN_MESH_NAME } from './constants.js'
 import { deployMines, placeMines, clearMines } from './mines.js'
-import { addActivator } from './activators.js'
+import { addActivator, clearActivators } from './activators.js'
 
 
 export function handleLevelComplete(scene) {
@@ -24,6 +24,7 @@ export function handleLevelComplete(scene) {
 export function handleGameOver(scene, handleUpdateGUIinfo) {
 
     clearMines(scene)
+    clearActivators(scene)
     scene.gameScores.push(scene.gameScore)
     scene.hiGameScore = Math.max.apply(Math, scene.gameScores)
 

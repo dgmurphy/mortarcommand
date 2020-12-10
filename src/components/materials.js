@@ -1,5 +1,8 @@
 import * as BABYLON from '@babylonjs/core';
 
+export var holomat
+export var iconmat
+
 export function createMaterials(scene) {
 
     var activatorbasemat = new BABYLON.StandardMaterial("activatorbasemat", scene);
@@ -9,16 +12,25 @@ export function createMaterials(scene) {
     activatorbaseconemat_1.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
 
     var activatorbaseconemat_2 = new BABYLON.StandardMaterial("activatorbaseconemat_2", scene);
-    activatorbaseconemat_2.diffuseColor = new BABYLON.Color3(0.82, 1, 0.46);
+    activatorbaseconemat_2.diffuseColor = new BABYLON.Color3(0.9, .9, 0.9);
 
     var activatorbaseconemat_3 = new BABYLON.StandardMaterial("activatorbaseconemat_3", scene);
-    activatorbaseconemat_3.diffuseColor = new BABYLON.Color3(1, 1, 0);
+    activatorbaseconemat_3.diffuseColor = new BABYLON.Color3(0.2, 1, 0.2);
 
-    var holomat = new BABYLON.StandardMaterial("holomat", scene);
+    var activatorbaseconemat_4 = new BABYLON.StandardMaterial("activatorbaseconemat_4", scene);
+    activatorbaseconemat_4.diffuseColor = new BABYLON.Color3(0.8, 0, 1);
+
+    holomat = new BABYLON.StandardMaterial("holomat", scene);
     holomat.backFaceCulling = false;
     holomat.alpha = 0.25
     holomat.emissiveColor = new BABYLON.Color3(0, .1, .4);
  
+    iconmat = new BABYLON.StandardMaterial("iconmat", scene);
+    iconmat.emissiveTexture = new BABYLON.Texture("/textures/mines.png", scene);
+    iconmat.backFaceCulling = false;
+    iconmat.opacityTexture = new BABYLON.Texture("/textures/mines.png", scene);
+
+
     let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);
     mineCoreMat.diffuseColor =  new BABYLON.Color3(1,1,.6)
     mineCoreMat.emissiveColor = new BABYLON.Color3(.1,.1,.1)

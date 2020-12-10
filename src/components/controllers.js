@@ -10,6 +10,7 @@ import { setModeInputs } from './mode-utils.js'
 import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
 import { updateMines } from './mines.js';
+import { activator_aging } from './activators.js'
 
 
 
@@ -47,6 +48,8 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
         for (var activator of scene.activators) {
             let spinSpeed = .02
             activator.rotator.rotate(BABYLON.Axis.Y, spinSpeed, BABYLON.Space.LOCAL)
+
+            activator_aging(activator, scene)
         }
 
 

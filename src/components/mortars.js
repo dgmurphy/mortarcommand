@@ -11,6 +11,8 @@ import { MORTAR_VELOCITY, MORTAR_YPEAK, ROUND_PHASES,
 import { destroyAgent, addArtifact } from './agent.js'
 import { handleLevelComplete } from './lifecycle.js'
 import { getAgentMat } from './materials.js'
+import { updateActivatorColor, activator_activate } from './activators.js'
+
 
 
 export function addFireListener(scene) {
@@ -193,9 +195,7 @@ export function updateThePackage(scene) {
 
   }
 
-      /*
-      TODO Update damage to agents and artifacts
-    */
+   
    let range
 
     for (var agent of scene.agents) { // update agent damage
@@ -341,6 +341,19 @@ export function updateRounds(scene) {
         }
       }
     }
+
+    // update activator fuses
+    for (var activator of scene.activators) {  
+      range = BABYLON.Vector3.Distance(activator.core.position, round.pos)
+      if (range < round.blastRadiusCurrent) {
+        activator.fusecount += (round.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF 
+        updateActivatorColor(activator, scene)
+      }
+
+      if(activator.fusecount > activator.fusetrigger)
+        activator_activate(activator, scene)
+    }
+   
 
   } // for each round
 

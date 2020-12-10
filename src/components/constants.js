@@ -1,3 +1,4 @@
+
 export const GAME_LEVELS = [
     { // level 1
       agents: [10, 50, 90, 90, 90, 90, 90],   // initial health values   
@@ -220,4 +221,5 @@ export const PACKAGE_POINTS_THRESH = 12000
 
 //export const TERRAIN_MESH_NAME = "Ntc Import Obj"
 export const TERRAIN_MESH_NAME = "TerrainMesh_primitive0"
+
 
