@@ -375,8 +375,9 @@ export function destroyMine(mine, scene) {
 
 export function clearMines(scene) {
 
-    for (var mine of scene.mines) {
-        destroyMine(mine, scene)
+    for (var m of scene.mines) {
+        m.core.dispose()
     }
-}
 
+    scene.mines = []
+}

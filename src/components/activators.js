@@ -98,17 +98,6 @@ function makeActivator(name, activator_type, scene) {
 
 }
 
-function destroy_activator(activator, scene) {
-
-    const hasName = (obj) => obj.name === activator.name
-    const idx = scene.activators.findIndex( hasName )
-
-    if(idx > -1) {
-        scene.activators[idx].core.dispose()
-        scene.activators.splice(idx, 1)
-    }    
-
-}
 
 export function activator_aging(activator, scene) {
 
@@ -168,9 +157,21 @@ export function addActivator(scene) {
 
 export function clearActivators(scene) {
 
-    let activators = scene.activators
-
-    for (var a of activators) {
-        destroy_activator(a, scene)
+    for (var a of scene.activators) {
+        a.core.dispose()
     }
+
+    scene.activators = []
+}
+
+function destroy_activator(activator, scene) {
+
+    const hasName = (obj) => obj.name === activator.name
+    const idx = scene.activators.findIndex( hasName )
+
+    if(idx > -1) {
+        scene.activators[idx].core.dispose()
+        scene.activators.splice(idx, 1)
+    }    
+
 }
