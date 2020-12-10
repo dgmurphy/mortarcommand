@@ -1,7 +1,8 @@
 
 export const GAME_LEVELS = [
     { // level 1
-      agents: [10, 50, 90, 90, 90, 90, 90, 100, 100, 100, 100],   // initial health values   
+      //agents: [10, 50, 90, 90, 90, 90, 90, 100, 100, 100, 100],   // initial health values   
+      agents: [100],   // initial health values   
       artifacts: { small: 1, med: 1, large: 2 },
       tip: "Tip: If things are moving a bit slowly, \nmake your browser window smaller."  
     },        

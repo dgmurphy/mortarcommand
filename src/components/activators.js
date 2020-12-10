@@ -1,34 +1,57 @@
 import * as BABYLON from '@babylonjs/core'
 import { getGroundElevation } from './utils.js'
 import { holomat, iconmat } from './materials.js'
+import { deployMines } from './mines.js'
 
 
 const HOLO_ALPHA_MAX = 0.25
 const MAX_AGE = 1500
+const START_FADE_AGE = 500
 var HOLO_ALPHA = 0.3
 const FUSE_TRIGGER = 64
 
-
 export function updateActivatorColor(activator, scene) {
 
+    let oldfuselevel = activator.fuselevel
     let f = activator.fusecount
     let level2 = FUSE_TRIGGER * (2/3)
     let level1 = FUSE_TRIGGER * (1/3)
 
     if (f > level2) {
         activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_4")
+        activator.fuselevel = 3
     }
     else if (f > level1) {
         activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_3")
+        activator.fuselevel = 2
     }
     else if (f > 0) {
         activator.fusecone.material = scene.getMaterialByName("activatorbaseconemat_2")
+        activator.fuselevel = 1
     }
+
+    if (activator.fuselevel > oldfuselevel)
+        scene.getSoundByName("activatorHit").play()
   
 }
 
 export function activator_activate(activator, scene) {
-    console.log("Activating " + activator.name)
+
+    switch(activator.type) {
+        case 'mine':
+            deployMines(scene)
+          break;
+        case 'power-up':
+            // code block
+        break;
+        case 'power-up':
+            // code block
+            break;
+        default:
+            console.log("error in activator type")
+    }
+
+    scene.getSoundByName("activatorPowerUp").play()
     destroy_activator(activator, scene)
 }
 
@@ -76,15 +99,25 @@ function makeActivator(name, activator_type, scene) {
     
     iconplane.scaling = new BABYLON.Vector3(0.9,.9,.9);
     
-    let iconmat = scene.getMaterialByName("iconmat")
-    iconplane.material = iconmat;
 
     /* animation */
     var animationCore = new BABYLON.Animation(name + "_anim", 
         "material.emissiveColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, 
         BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE)
 
-
+    switch(activator_type) {
+            case 'mine':
+                iconplane.material = scene.getMaterialByName("iconmat_mines")
+              break;
+            case 'power-up':
+                // code block
+            break;
+            case 'power-up':
+                // code block
+                break;
+            default:
+                console.log("error in activator type")
+    }
 
     return {
         name: name,
@@ -92,9 +125,11 @@ function makeActivator(name, activator_type, scene) {
         fusecone: basecone,
         fusecount: 0,
         fusetrigger: FUSE_TRIGGER,
+        fuselevel: 0,
         rotator: rotator,
         flickering: false,
-        born_frame: scene.gameFrame
+        born_frame: scene.gameFrame,
+        type: activator_type
     }
 
 }
@@ -103,12 +138,14 @@ function makeActivator(name, activator_type, scene) {
 export function activator_aging(activator, scene) {
 
     let age = scene.gameFrame - activator.born_frame
-    let alpha_coeff = 1
+    let alpha_coeff
 
     if (age > MAX_AGE) {
         destroy_activator(activator, scene)
+    } else if (age > START_FADE_AGE) {
+        alpha_coeff = 1 - ((age - START_FADE_AGE)/MAX_AGE)
     } else {
-        alpha_coeff = 1 - (age/MAX_AGE)
+        alpha_coeff = 1
     }
 
     if (activator.flickering) {
@@ -123,19 +160,15 @@ export function activator_aging(activator, scene) {
         if (Math.random() > 0.98)
             activator.flickering = true
     }
-
-
-    
-
 }
 
-export function addActivator(scene) {
+export function addActivator(scene, activator_type) {
 
     // TODO make sure new activator does not collide
     //  with existing activators or mines
     
     let name = "activator_" + scene.activatorCounter
-    let avator = makeActivator(name, "mines", scene)
+    let avator = makeActivator(name, activator_type, scene)
 
     const MAX_X = 7
     const MIN_X = -10

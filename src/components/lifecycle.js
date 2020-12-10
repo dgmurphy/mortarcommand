@@ -265,7 +265,7 @@ function handleDebug(e) {
 function deployActivator(e) {
     var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
     var scene = c.bjsScene
-    addActivator(scene)
+    addActivator(scene, "mine")
 }
 
 

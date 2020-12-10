@@ -15,17 +15,17 @@ export function createMaterials(scene) {
     activatorbaseconemat_2.diffuseColor = new BABYLON.Color3(0.9, .9, 0.9);
 
     var activatorbaseconemat_3 = new BABYLON.StandardMaterial("activatorbaseconemat_3", scene);
-    activatorbaseconemat_3.diffuseColor = new BABYLON.Color3(0.2, 1, 0.2);
+    activatorbaseconemat_3.diffuseColor = new BABYLON.Color3(0.8, 0, 1);
 
     var activatorbaseconemat_4 = new BABYLON.StandardMaterial("activatorbaseconemat_4", scene);
-    activatorbaseconemat_4.diffuseColor = new BABYLON.Color3(0.8, 0, 1);
+    activatorbaseconemat_4.diffuseColor = new BABYLON.Color3(0.2, 1, 0.2);
 
     holomat = new BABYLON.StandardMaterial("holomat", scene);
     holomat.backFaceCulling = false;
     holomat.alpha = 0.25
     holomat.emissiveColor = new BABYLON.Color3(0, .1, .4);
  
-    iconmat = new BABYLON.StandardMaterial("iconmat", scene);
+    iconmat = new BABYLON.StandardMaterial("iconmat_mines", scene);
     iconmat.emissiveTexture = new BABYLON.Texture("/textures/mines.png", scene);
     iconmat.backFaceCulling = false;
     iconmat.opacityTexture = new BABYLON.Texture("/textures/mines.png", scene);
