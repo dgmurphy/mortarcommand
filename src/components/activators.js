@@ -60,11 +60,12 @@ function makeActivator(name, activator_type, scene) {
     let baseconemat = scene.getMaterialByName("activatorbaseconemat_1")
     basecone.material = baseconemat
   
-    const holocone = BABYLON.MeshBuilder.CreateCylinder("holocone", {height: 1, diameterBottom: 0.65});
+    const holocone = BABYLON.MeshBuilder.CreateCylinder("holocone", {height: 1.2, diameterBottom: 0.65});
     holocone.parent = rotator
     holocone.enableEdgesRendering(); 
     holocone.edgesWidth = 1.5;
     holocone.edgesColor = new BABYLON.Color4(1, 1, 1, 0.25);  
+    holocone.position.y = 0
 
     //let holomat = scene.getMaterialByName("holomat")
     holocone.material = holomat
