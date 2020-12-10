@@ -31,7 +31,20 @@ are BJS primitives from the provided polyhedra examples.
 TODO: Figure out whats going wrong in Edge. Also try some scene optimization and maybe look at using
 deterministicLockstep for framerate consistency.
 
-
+## TODO
+* Activator creation system
+* Audio/graphics for activator creation, activation
+* Audio for activator expiration
+* Activator holo texture update
+* Message panel for events
+* Station health activator
+* Mortar boost activator
+* Mortar boost mode
+* Trailer
+* Merge changes for other boards
+* Controls updates
+* Redo insta images
+* Clean up README
 
 ## Available Scripts
 
