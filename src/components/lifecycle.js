@@ -28,6 +28,7 @@ export function handleGameOver(scene, handleUpdateGUIinfo) {
     scene.gameScores.push(scene.gameScore)
     scene.hiGameScore = Math.max.apply(Math, scene.gameScores)
 
+
     handleUpdateGUIinfo()   
 
     addGameOverControl(scene)
@@ -96,6 +97,9 @@ export function addGameOverControl(scene) {
         document.getElementById('innerbar').setAttribute("style", "width:0%");
         document.getElementById('package-loaded').src='textures/mortar_unlit.png'
 
+        scene.activator_score_thresh_set = false
+        scene.activator_last_score = 0
+    
 
     });
 

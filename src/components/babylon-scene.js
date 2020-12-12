@@ -73,9 +73,9 @@ export default class BabylonScene extends Component {
     // counters
     scene.mineCounter = 1
     scene.activatorCounter = 1
+    scene.activator_score_thresh_set = false
+    scene.activator_last_score = 0
 
-    // glow
-    //var gl = new BABYLON.GlowLayer("glow", scene);
 
     BABYLON.Animation.AllowMatricesInterpolation = true
     

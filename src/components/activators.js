@@ -9,28 +9,28 @@ const MAX_AGE = 1500
 const START_FADE_AGE = 500
 var HOLO_ALPHA = 0.3
 const FUSE_TRIGGER = 64
-const SCORE_INCREMENT = 4000
-var score_thresh_set = false
-var score_thresh
-var last_score
+const SCORE_INCREMENT = 3000
+
 
 export function activatorChance(scene) {
 
     if (scene.activators.length > 0)
         return
 
-    if (score_thresh_set) {
-        let deltascore = scene.gameScore - last_score 
-        if (deltascore > score_thresh) {
+    if (scene.activator_score_thresh_set) {
+        let deltascore = scene.gameScore - scene.activator_last_score 
+        if ((deltascore > scene.activator_score_thresh) && (scene.mines.length < 3)) {
             addActivator(scene, "mine")
-            score_thresh_set = false
+            scene.activator_score_thresh_set = false
         }
     }
     else {
-        score_thresh = SCORE_INCREMENT + (Math.random() * 3000)
-        score_thresh_set = true
-        last_score = scene.gameScore
-        console.log("SCORE THRESH SET " + last_score + " " + score_thresh)
+        scene.activator_score_thresh = SCORE_INCREMENT + (Math.random() * 3000)
+        scene.activator_score_thresh_set = true
+        scene.activator_last_score = scene.gameScore
+
+        var nextActivator = scene.gameScore + scene.activator_score_thresh
+        console.log("NEXT ACTIVATOR AT " + nextActivator)
     }
 
 }
@@ -209,6 +209,8 @@ export function addActivator(scene, activator_type) {
 
     scene.activators.push(avator)
     scene.activatorCounter += 1
+
+    scene.getSoundByName("newActivator").play()
 }
 
 export function clearActivators(scene) {

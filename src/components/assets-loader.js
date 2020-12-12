@@ -13,6 +13,12 @@ export function loadAssets(scene, updateAssetStatus) {
     
 
     /* ------ sound load ------------ */
+    var newActivatorSoundTask = assetsManager.addBinaryFileTask("newActivatorSoundTask", "sounds/new_activator.wav")
+    newActivatorSoundTask.onSuccess = function (task) {
+      let newActivatorSound = new BABYLON.Sound("newActivator", task.data, scene, soundReady(task))
+    }
+
+
     var activatorPowerUpSoundTask = assetsManager.addBinaryFileTask("activatorPowerUpSoundTask", "sounds/power-up.wav")
     activatorPowerUpSoundTask.onSuccess = function (task) {
       let activatorPowerUpSound = new BABYLON.Sound("activatorPowerUp", task.data, scene, soundReady(task))
