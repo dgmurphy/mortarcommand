@@ -34,9 +34,7 @@ deterministicLockstep for framerate consistency.
 ## TODO
 * Spread spawn location
 * Activator creation system
-* Audio/graphics for activator creation, activation
 * Audio for activator expiration
-* Activator holo texture update
 * Message panel for events
 * Station health activator
 * Mortar boost activator
