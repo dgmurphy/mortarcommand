@@ -6,6 +6,38 @@ import { getGroundElevation } from './utils.js'
 import { handleGameOver } from './lifecycle.js'
 
 
+// restore one wreck
+export function repairOneStation(scene) {
+
+    var wreck = null
+    for (var w of scene.wreckedStations) {
+        if (w.shell.isEnabled()) {
+            wreck = w
+            break
+        }
+    }
+
+    if (wreck !== null) {
+
+        // get the station info
+        let id = wreck.id
+        let posx = wreck.shell.position.x
+        let posz = wreck.shell.position.z
+
+        /* remove the wreckage */
+        wreck.shell.dispose()
+        wreck.innerCore.dispose()
+        wreck.particles.dispose()
+
+        const hasId = (obj) => obj.id === id
+        const idx = scene.wreckedStations.findIndex(hasId)
+        scene.wreckedStations.splice(idx, 1)
+
+        /* replace the station */
+        addPowerStation(scene, posx, posz, id)
+    }
+}
+
 function makePowerStation(name, scene) {
 
     /* perimeter */
@@ -178,6 +210,8 @@ export function addPowerStation(scene, x, z, id) {
 
     addPowerStationWreckage(scene, powerStation)  
 
+    scene.liveStations += 1
+
 }
 
 
@@ -322,7 +356,7 @@ export function enableStationWreckage(scene, station) {
         ws.exploParticles.start()
     }
 
-
+    scene.liveStations -= 1
 }
 
 export function addPowerStationWreckage(scene, station) {

@@ -1,7 +1,8 @@
 import * as BABYLON from '@babylonjs/core';
 
 export var holomat
-export var iconmat
+export var iconmat_mine
+export var iconmat_cross
 
 export function createMaterials(scene) {
 
@@ -29,10 +30,15 @@ export function createMaterials(scene) {
     holomat.emissiveTexture = new BABYLON.Texture("textures/scanlines.png", scene);
     holomat.diffuseTexture = new BABYLON.Texture("textures/scanlines.png", scene);
  
-    iconmat = new BABYLON.StandardMaterial("iconmat_mines", scene);
-    iconmat.emissiveTexture = new BABYLON.Texture("/textures/mines.png", scene);
-    iconmat.backFaceCulling = false;
-    iconmat.opacityTexture = new BABYLON.Texture("/textures/mines.png", scene);
+    iconmat_mine = new BABYLON.StandardMaterial("iconmat_mines", scene);
+    iconmat_mine.emissiveTexture = new BABYLON.Texture("/textures/mines.png", scene);
+    iconmat_mine.backFaceCulling = false;
+    iconmat_mine.opacityTexture = new BABYLON.Texture("/textures/mines.png", scene);
+
+    iconmat_cross = new BABYLON.StandardMaterial("iconmat_cross", scene);
+    iconmat_cross.emissiveTexture = new BABYLON.Texture("/textures/cross.png", scene);
+    iconmat_cross.backFaceCulling = false;
+    iconmat_cross.opacityTexture = new BABYLON.Texture("/textures/cross.png", scene);
 
 
     let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);

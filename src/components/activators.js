@@ -1,7 +1,8 @@
 import * as BABYLON from '@babylonjs/core'
 import { getGroundElevation } from './utils.js'
-import { holomat, iconmat } from './materials.js'
+import { holomat } from './materials.js'
 import { deployMines } from './mines.js'
+import { repairOneStation } from './station.js'
 
 
 const HOLO_ALPHA_MAX = 0.25
@@ -12,15 +13,46 @@ const FUSE_TRIGGER = 64
 const SCORE_INCREMENT = 3000
 
 
+function pickActivatorType(scene) {
+
+    var atypes = []
+
+    if (scene.liveStations < 3)
+        atypes.push("health")
+    
+    if (scene.mines.length < 3)
+        atypes.push("mine")
+
+    if (atypes.length === 0)
+        return "none"
+
+    // existing activators should not be duplicated
+    for (var a of scene.activators) {
+        var idx = atypes.indexOf(a.type)
+        if (idx > -1)
+            atypes.splice(idx, 1)
+    }
+
+    if (atypes.length === 0)
+        return "none"
+
+    // pick one from remaining
+    let i = Math.floor(Math.random() * atypes.length);
+    return atypes[i]
+
+
+}
+
 export function activatorChance(scene) {
 
-    if (scene.activators.length > 0)
-        return
 
     if (scene.activator_score_thresh_set) {
         let deltascore = scene.gameScore - scene.activator_last_score 
-        if ((deltascore > scene.activator_score_thresh) && (scene.mines.length < 3)) {
-            addActivator(scene, "mine")
+        if (deltascore > scene.activator_score_thresh) {
+            var activator_type = pickActivatorType(scene)
+            if (activator_type != "none") {
+                addActivator(scene, activator_type)
+            }
             scene.activator_score_thresh_set = false
         }
     }
@@ -66,8 +98,8 @@ export function activator_activate(activator, scene) {
         case 'mine':
             deployMines(scene)
           break;
-        case 'power-up':
-            // code block
+        case 'health':
+            repairOneStation(scene)
         break;
         case 'power-up':
             // code block
@@ -131,9 +163,9 @@ function makeActivator(name, activator_type, scene) {
             case 'mine':
                 iconplane.material = scene.getMaterialByName("iconmat_mines")
               break;
-            case 'power-up':
-                // code block
-            break;
+            case 'health':
+                iconplane.material = scene.getMaterialByName("iconmat_cross")
+              break;
             case 'power-up':
                 // code block
                 break;
@@ -151,7 +183,8 @@ function makeActivator(name, activator_type, scene) {
         rotator: rotator,
         flickering: false,
         born_frame: scene.gameFrame,
-        type: activator_type
+        type: activator_type,
+        iconmat: iconplane.material
     }
 
 }
@@ -172,13 +205,13 @@ export function activator_aging(activator, scene) {
 
     if (activator.flickering) {
         holomat.alpha = 0
-        iconmat.alpha = 0
+        activator.iconmat.alpha = 0
         if (Math.random() > 0.6) {
             activator.flickering = false  
         }     
     } else {
         holomat.alpha = HOLO_ALPHA * alpha_coeff
-        iconmat.alpha = 1 * alpha_coeff
+        activator.iconmat.alpha = 1 * alpha_coeff
         if (Math.random() > 0.98)
             activator.flickering = true
     }

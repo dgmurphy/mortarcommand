@@ -262,8 +262,18 @@ function handleDebug(e) {
         console.log("DEBUG: " + e.which)
     }
 
+    if ( (e.which === 72) && (e.altKey) ) {
+        deployHealthActivator(e)
+        console.log("DEBUG: " + e.which)
+    }
 
 
+}
+
+function deployHealthActivator(e) {
+    var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
+    var scene = c.bjsScene
+    addActivator(scene, "health")
 }
 
 

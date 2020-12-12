@@ -67,6 +67,7 @@ export default class Viewer extends Component {
         scene.packagePoints = 0
         scene.mines = []
         scene.activators = []
+        scene.liveStations = 0
         
         engine.runRenderLoop(() => {
             if (scene) {
