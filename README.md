@@ -32,6 +32,7 @@ TODO: Figure out whats going wrong in Edge. Also try some scene optimization and
 deterministicLockstep for framerate consistency.
 
 ## TODO
+* Spread spawn location
 * Activator creation system
 * Audio/graphics for activator creation, activation
 * Audio for activator expiration

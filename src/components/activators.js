@@ -9,6 +9,31 @@ const MAX_AGE = 1500
 const START_FADE_AGE = 500
 var HOLO_ALPHA = 0.3
 const FUSE_TRIGGER = 64
+const SCORE_INCREMENT = 4000
+var score_thresh_set = false
+var score_thresh
+var last_score
+
+export function activatorChance(scene) {
+
+    if (scene.activators.length > 0)
+        return
+
+    if (score_thresh_set) {
+        let deltascore = scene.gameScore - last_score 
+        if (deltascore > score_thresh) {
+            addActivator(scene, "mine")
+            score_thresh_set = false
+        }
+    }
+    else {
+        score_thresh = SCORE_INCREMENT + (Math.random() * 3000)
+        score_thresh_set = true
+        last_score = scene.gameScore
+        console.log("SCORE THRESH SET " + last_score + " " + score_thresh)
+    }
+
+}
 
 export function updateActivatorColor(activator, scene) {
 
@@ -83,9 +108,9 @@ function makeActivator(name, activator_type, scene) {
     let baseconemat = scene.getMaterialByName("activatorbaseconemat_1")
     basecone.material = baseconemat
   
-    const holocone = BABYLON.MeshBuilder.CreateCylinder("holocone", {height: 1.2, diameterBottom: 0.65, cap:BABYLON.Mesh.NO_CAP});
+    const holocone = BABYLON.MeshBuilder.CreateCylinder("holocone", {height: 1.4, diameterBottom: 0.65, cap:BABYLON.Mesh.NO_CAP});
     holocone.parent = rotator 
-    holocone.position.y = 0
+    holocone.position.y = 0.15
 
     //let holomat = scene.getMaterialByName("holomat")
     holocone.material = holomat

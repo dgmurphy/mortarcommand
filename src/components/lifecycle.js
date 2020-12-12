@@ -254,7 +254,7 @@ function handleDebug(e) {
     }
 
     if ( (e.which === 65) && (e.altKey) ) {
-        deployActivator(e)
+        deployMineActivator(e)
         console.log("DEBUG: " + e.which)
     }
 
@@ -262,7 +262,8 @@ function handleDebug(e) {
 
 }
 
-function deployActivator(e) {
+
+function deployMineActivator(e) {
     var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
     var scene = c.bjsScene
     addActivator(scene, "mine")

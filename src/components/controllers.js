@@ -10,7 +10,7 @@ import { setModeInputs } from './mode-utils.js'
 import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
 import { updateMines } from './mines.js';
-import { activator_aging } from './activators.js'
+import { activator_aging, activatorChance } from './activators.js'
 
 
 
@@ -60,6 +60,9 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
             setModeInputs(scene, handleUpdateGUIinfo)
             for (agent of scene.agents)
                 steeringPoll(agent)
+
+            // do activatorCheck here also
+            activatorChance(scene)
 
             modeCheckCounter = 0
         }

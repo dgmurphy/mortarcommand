@@ -24,9 +24,10 @@ export function createMaterials(scene) {
     holomat.backFaceCulling = false
     holomat.alpha = 1
     //holomat.emissiveColor = new BABYLON.Color3(0,0,1);
-    holomat.opacityTexture = new BABYLON.Texture("https://raw.githubusercontent.com/dgmurphy/image-repo/master/scanlines.png", scene);
-    holomat.emissiveTexture = new BABYLON.Texture("https://raw.githubusercontent.com/dgmurphy/image-repo/master/scanlines.png", scene);
-    holomat.diffuseTexture = new BABYLON.Texture("https://raw.githubusercontent.com/dgmurphy/image-repo/master/scanlines.png", scene);
+    //holomat.getAlphaFromRGB = true
+    holomat.opacityTexture = new BABYLON.Texture("textures/scanlines_op.png", scene);
+    holomat.emissiveTexture = new BABYLON.Texture("textures/scanlines.png", scene);
+    holomat.diffuseTexture = new BABYLON.Texture("textures/scanlines.png", scene);
  
     iconmat = new BABYLON.StandardMaterial("iconmat_mines", scene);
     iconmat.emissiveTexture = new BABYLON.Texture("/textures/mines.png", scene);
