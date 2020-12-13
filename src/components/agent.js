@@ -4,7 +4,7 @@ import { AGENT_SENSOR_RADIUS, ARTIFACT_AREA, ARTIFACT_SIZE,
         ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH } from './constants.js'
 import { getGroundElevation, randomRotation } from './utils.js'
 import { getAgentVerts, getTrucatedDodecahedron } from './geometry.js'
-import { getAgentMat } from './materials.js'
+import { getAgentMat, roundParticlecolors} from './materials.js'
 
 
 function makeArtifact(name, size, scene) {
@@ -178,13 +178,7 @@ function makeRound(name, scene) {
     // Create a particle system for round trail
     var particleSystem = new BABYLON.GPUParticleSystem(name + "_particles", { capacity: 800 }, scene);
     particleSystem.createPointEmitter(new BABYLON.Vector3(1, -.5, 0), new BABYLON.Vector3(1, .5, 0));
- 
-    let colors = {
-        particles_color1: new BABYLON.Color4(1,1,1,1),
-        particles_color2: new BABYLON.Color4(.4, .3, 0.2, 1.0),
-        particles_colorDead: new BABYLON.Color4(0.3, 0.1, 0, 0.0)
-    }   
-    
+   
     let flareTexture = new BABYLON.Texture("textures/flare.png", scene);
 
     particleSystem.particleTexture = flareTexture
@@ -192,9 +186,9 @@ function makeRound(name, scene) {
     particleSystem.minSize = 0.01;
     particleSystem.maxSize = 0.06;
     particleSystem.maxLifeTime = .001
-    particleSystem.color1 = colors.particles_color1
-    particleSystem.color2 = colors.particles_color2
-    particleSystem.colorDead = colors.particles_colorDead
+    particleSystem.color1 = roundParticlecolors.particles_color1
+    particleSystem.color2 = roundParticlecolors.particles_color2
+    particleSystem.colorDead = roundParticlecolors.particles_colorDead
     particleSystem.emitRate = 100;
     particleSystem.minEmitPower = 1;
     particleSystem.maxEmitPower = 4;

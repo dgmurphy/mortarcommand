@@ -3,14 +3,14 @@ import { getAngle, getGroundRange } from './utils.js'
 import { FRAMETHRESH_GUI, FIELD_EXTENTS, phases, edge, 
         STATION_MAX_HEALTH, hotgrid, GUTTER_WIDTH, AGENT_SENSOR_RADIUS,
         AGENT_MAX_SPEED, AGENT_MAX_HEALTH, AGENT_MIN_SPEED,
-        TERRAIN_MESH_NAME } from './constants.js'
+        TERRAIN_MESH_NAME, MORTAR_BOOST_LIFE} from './constants.js'
 import { randomSteerMotivator, seekZoneMotivator, locateArtifactMotivator,
          moveToTargetMotivator, avoidEdgeMotivator } from './steering-motivators.js'
 import { setModeInputs } from './mode-utils.js'
 import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
 import { updateMines } from './mines.js';
-import { activator_aging, activatorChance } from './activators.js'
+import { activator_aging, activatorChance, disableMortarBoost } from './activators.js'
 
 
 
@@ -61,8 +61,12 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
             for (agent of scene.agents)
                 steeringPoll(agent)
 
-            // do activatorCheck here also
+            // do activatorCheck
             activatorChance(scene)
+
+            // check if mortar boost is expired
+            if ((scene.gameFrame - scene.mortarBoostFrame) > MORTAR_BOOST_LIFE)
+                disableMortarBoost(scene)
 
             modeCheckCounter = 0
         }
@@ -85,7 +89,7 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
     
         frameCounter += 1
         modeCheckCounter += 1
-        scene.addAgentCounter += 1
+        //scene.addAgentCounter += 1
        
     })
     // ************** Game/Render loop done ***********************************

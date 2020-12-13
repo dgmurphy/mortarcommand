@@ -4,6 +4,20 @@ export var holomat
 export var iconmat_mine
 export var iconmat_cross
 
+export const  roundParticlecolors = {
+    particles_color1: new BABYLON.Color4(1,1,1,1),
+    particles_color2: new BABYLON.Color4(.4, .3, 0.2, 1.0),
+    particles_colorDead: new BABYLON.Color4(0.3, 0.1, 0, 0.0)
+}   
+
+export const  roundParticlecolorsBoost = {
+    particles_color1: new BABYLON.Color4(.3,1,.3,1),
+    particles_color2: new BABYLON.Color4(.4, .7, 0.2, 1.0),
+    particles_colorDead: new BABYLON.Color4(0.1, 0.3, 0, 0.0)
+}   
+
+
+
 export function createMaterials(scene) {
 
     var activatorbasemat = new BABYLON.StandardMaterial("activatorbasemat", scene);
@@ -39,6 +53,11 @@ export function createMaterials(scene) {
     iconmat_cross.emissiveTexture = new BABYLON.Texture("/textures/cross.png", scene);
     iconmat_cross.backFaceCulling = false;
     iconmat_cross.opacityTexture = new BABYLON.Texture("/textures/cross.png", scene);
+
+    var iconmat_bolt = new BABYLON.StandardMaterial("iconmat_bolt", scene);
+    iconmat_bolt.emissiveTexture = new BABYLON.Texture("/textures/bolt.png", scene);
+    iconmat_bolt.backFaceCulling = false;
+    iconmat_bolt.opacityTexture = new BABYLON.Texture("/textures/bolt.png", scene);
 
 
     let mineCoreMat = new BABYLON.StandardMaterial("mineCoreMat", scene);
@@ -100,6 +119,9 @@ export function createMaterials(scene) {
     artifactShellMat.wireframe = true;
 
     let mortarMat = new BABYLON.StandardMaterial("mortarMat", scene)
+    //mortarMat.diffuseColor =  new BABYLON.Color3(.1,1,.1)
+    //mortarMat.emissiveColor =  new BABYLON.Color3(0,.3,0)
+
 
     let packageMat = new BABYLON.StandardMaterial("packageMat", scene)
 

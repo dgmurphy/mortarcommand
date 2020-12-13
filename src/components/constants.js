@@ -202,7 +202,7 @@ export const GUN_POSITION = {
 export const BLAST_ALPHA = 0.9
 export const MORTAR_BLAST_RADIUS_START = 1
 export const MORTAR_BLAST_LIFE = 10
-export const BLAST_DAMAGE_COEFF = 3
+//export var BLAST_DAMAGE_COEFF = 3  add to scene instead
 
 export const GUN_BLAST_RADIUS_START = 0.3
 export const GUN_BLAST_LIFE = 8
@@ -223,4 +223,6 @@ export const PACKAGE_POINTS_THRESH = 12000
 //export const TERRAIN_MESH_NAME = "Ntc Import Obj"
 export const TERRAIN_MESH_NAME = "TerrainMesh_primitive0"
 
+// how long mortar boost lasts
+export const MORTAR_BOOST_LIFE = 1000
 

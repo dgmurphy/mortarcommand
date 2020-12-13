@@ -88,6 +88,7 @@ export function addGameOverControl(scene) {
         scene.gameScore = 0
         scene.gameNumber += 1
         addPowerStations(scene)
+        scene.mortarBoost = false
 
         addLevelControl(scene)
 
@@ -134,7 +135,7 @@ export function addLevelControl(scene) {
         destroyAgent(agentInfo, scene)
     }
     scene.agents = []
-    scene.addAgentCounter = 0
+    //scene.addAgentCounter = 0
     scene.agentsDestroyed = 0
 
     // destroy artifacts
@@ -247,26 +248,30 @@ function handleDebug(e) {
         console.log("DEBUG: " + e.which)
     }
 
-    if ( (e.which === 84) && (e.altKey) ) {
+    else if ( (e.which === 84) && (e.altKey) ) {
         hideTerrain(e)
         console.log("DEBUG: " + e.which)
     }
 
-    if ( (e.which === 73) && (e.altKey) ) {
+    else if ( (e.which === 73) && (e.altKey) ) {
         replaceMines(e)
         console.log("DEBUG: " + e.which)
     }
 
-    if ( (e.which === 65) && (e.altKey) ) {
+    else if ( (e.which === 65) && (e.altKey) ) {
         deployMineActivator(e)
         console.log("DEBUG: " + e.which)
     }
 
-    if ( (e.which === 72) && (e.altKey) ) {
+    else if ( (e.which === 72) && (e.altKey) ) {
         deployHealthActivator(e)
         console.log("DEBUG: " + e.which)
     }
 
+    else if ( (e.which === 66) && (e.altKey) ) {
+        deployBoltActivator(e)
+        console.log("DEBUG: " + e.which)
+    }
 
 }
 
@@ -283,6 +288,12 @@ function deployMineActivator(e) {
     addActivator(scene, "mine")
 }
 
+
+function deployBoltActivator(e) {
+    var c = e.currentTarget.document.getElementsByTagName('canvas')[0]
+    var scene = c.bjsScene
+    addActivator(scene, "bolt")
+}
 
 function replaceMines(e) {
 

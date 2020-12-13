@@ -7,7 +7,7 @@ import { MORTAR_VELOCITY, MORTAR_YPEAK, ROUND_PHASES,
    BLAST_ALPHA, MORTAR_BLAST_RADIUS_START, MORTAR_BLAST_LIFE, 
    GUN_BLAST_LIFE, GUN_BLAST_RADIUS_START,
    POINTS_AGENT_HIT, ARTIFACT_MAX_HEALTH, POINTS_ARTIFACT_HIT,
-   BLAST_DAMAGE_COEFF, GAME_PHASES, PACKAGE_VELOCITY, TERRAIN_MESH_NAME} from './constants.js'
+   GAME_PHASES, PACKAGE_VELOCITY, TERRAIN_MESH_NAME} from './constants.js'
 import { destroyAgent, addArtifact } from './agent.js'
 import { handleLevelComplete } from './lifecycle.js'
 import { getAgentMat } from './materials.js'
@@ -26,7 +26,7 @@ export function addFireListener(scene) {
 
 function handleKeyPress(e) {
 
-  if ( (e.which === 90) || (e.which === 77) ) {
+  if ( (e.which === 90) || (e.which === 77) || (e.which === 81) ) {
     fireRound(e)
   } else if( e.which === 32) {
     fireThePackage(e)
@@ -204,7 +204,7 @@ export function updateThePackage(scene) {
 
       if (range < tp.blastRadiusCurrent) {
 
-        agent.health -= (tp.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF * .065
+        agent.health -= (tp.blastRadiusCurrent - range) * scene.BLAST_DAMAGE_COEFF * .065
         updateAgentColor(agent, scene)
         scene.gameScore += POINTS_AGENT_HIT 
 
@@ -222,7 +222,7 @@ export function updateThePackage(scene) {
       if (artifact.detected === true) {   // artifact is visible
         range = BABYLON.Vector3.Distance(artifact.pos, tp.pos)
         if (range < tp.blastRadiusCurrent) {
-          artifact.health -= (tp.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF * .065
+          artifact.health -= (tp.blastRadiusCurrent - range) * scene.BLAST_DAMAGE_COEFF * .065
           updateArtifactColor(artifact, scene)
           scene.gameScore += POINTS_ARTIFACT_HIT
 
@@ -311,7 +311,7 @@ export function updateRounds(scene) {
 
       if (range < round.blastRadiusCurrent) {
 
-        agent.health -= (round.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF 
+        agent.health -= (round.blastRadiusCurrent - range) * scene.BLAST_DAMAGE_COEFF 
         updateAgentColor(agent, scene)
         scene.gameScore += POINTS_AGENT_HIT 
         scene.packagePoints += POINTS_AGENT_HIT 
@@ -331,7 +331,7 @@ export function updateRounds(scene) {
       if (artifact.detected === true) {   // artifact is visible
         range = BABYLON.Vector3.Distance(artifact.pos, round.pos)
         if (range < round.blastRadiusCurrent) {
-          artifact.health -= (round.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF 
+          artifact.health -= (round.blastRadiusCurrent - range) * scene.BLAST_DAMAGE_COEFF 
           updateArtifactColor(artifact, scene)
           scene.gameScore += POINTS_ARTIFACT_HIT
           scene.packagePoints += POINTS_ARTIFACT_HIT
@@ -346,7 +346,7 @@ export function updateRounds(scene) {
     for (var activator of scene.activators) {  
       range = BABYLON.Vector3.Distance(activator.core.position, round.pos)
       if (range < round.blastRadiusCurrent) {
-        activator.fusecount += (round.blastRadiusCurrent - range) * BLAST_DAMAGE_COEFF 
+        activator.fusecount += (round.blastRadiusCurrent - range) * scene.BLAST_DAMAGE_COEFF 
         updateActivatorColor(activator, scene)
       }
 

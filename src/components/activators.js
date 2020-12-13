@@ -1,6 +1,6 @@
 import * as BABYLON from '@babylonjs/core'
 import { getGroundElevation } from './utils.js'
-import { holomat } from './materials.js'
+import { holomat, roundParticlecolors, roundParticlecolorsBoost } from './materials.js'
 import { deployMines } from './mines.js'
 import { repairOneStation } from './station.js'
 
@@ -10,7 +10,7 @@ const MAX_AGE = 1500
 const START_FADE_AGE = 500
 var HOLO_ALPHA = 0.3
 const FUSE_TRIGGER = 64
-const SCORE_INCREMENT = 3000
+const SCORE_INCREMENT = 300
 
 
 function pickActivatorType(scene) {
@@ -22,6 +22,10 @@ function pickActivatorType(scene) {
     
     if (scene.mines.length < 3)
         atypes.push("mine")
+
+    if (scene.mortarBoost == false)
+        atypes.push("bolt")
+
 
     if (atypes.length === 0)
         return "none"
@@ -92,6 +96,57 @@ export function updateActivatorColor(activator, scene) {
   
 }
 
+function enableMortarBoost(scene) {
+
+    scene.mortarBoost = true
+
+    scene.mortarBoostFrame = scene.gameFrame
+    scene.getMaterialByName("mortarMat").diffuseColor =  new BABYLON.Color3(.2,.7,.2)
+   
+    let bmat = scene.getMaterialByName("bulletMat")
+    bmat.diffuseColor =  new BABYLON.Color3(0,1,0)
+    bmat.emissiveColor =  new BABYLON.Color3(0,1,0)
+    
+    scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(0.4,1,.45)
+    scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(.2,.7,.2)
+
+    //mortarMat.emissiveColor =  new BABYLON.Color3(0.5,0.5,0)
+    for (var r of scene.rounds) {
+        r.meshes.particles.color1 = roundParticlecolorsBoost.particles_color1
+        r.meshes.particles.color2 = roundParticlecolorsBoost.particles_color2
+        r.meshes.particles.colorDead = roundParticlecolorsBoost.particles_colorDead
+        r.meshes.bullet.scaling = new BABYLON.Vector3(0.08, 0.9, 0.08);
+    }
+
+    scene.BLAST_DAMAGE_COEFF = 9
+
+}
+
+export function disableMortarBoost(scene) {
+
+    scene.mortarBoost = false
+    
+    scene.getMaterialByName("mortarMat").diffuseColor =  new BABYLON.Color3(1,1,1)
+
+    let bmat = scene.getMaterialByName("bulletMat")
+    bmat.diffuseColor =  new BABYLON.Color3(1,1,1)
+    bmat.emissiveColor =  new BABYLON.Color3(1,1,1)
+
+    scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(1,.97,.67)
+    scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(1,1,1)
+
+    for (var r of scene.rounds) {
+        r.meshes.particles.color1 = roundParticlecolors.particles_color1
+        r.meshes.particles.color2 = roundParticlecolors.particles_color2
+        r.meshes.particles.colorDead = roundParticlecolors.particles_colorDead
+        r.meshes.bullet.scaling = new BABYLON.Vector3(0.05, 0.6, 0.05);
+    }
+
+    scene.BLAST_DAMAGE_COEFF = 3
+}
+
+
+
 export function activator_activate(activator, scene) {
 
     switch(activator.type) {
@@ -101,8 +156,8 @@ export function activator_activate(activator, scene) {
         case 'health':
             repairOneStation(scene)
         break;
-        case 'power-up':
-            // code block
+        case 'bolt':
+            enableMortarBoost(scene)
             break;
         default:
             console.log("error in activator type")
@@ -166,8 +221,8 @@ function makeActivator(name, activator_type, scene) {
             case 'health':
                 iconplane.material = scene.getMaterialByName("iconmat_cross")
               break;
-            case 'power-up':
-                // code block
+            case 'bolt':
+                iconplane.material = scene.getMaterialByName("iconmat_bolt")
                 break;
             default:
                 console.log("error in activator type")
