@@ -29,7 +29,7 @@ export const GAME_LEVELS = [
     {  // level 6
         agents: [9,9,9,9,9,9,9,9,9,9],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Tip: The closer your mortar detonates to\n a bot, the more damage it does."
+        tip: "Tip: Shoot the activator buttons below\n the holograms to unlock assets."
     },    
     {  // level 7
         agents: [10,20,20,20,20,30,30,70,80,90,100, 100],
@@ -54,22 +54,22 @@ export const GAME_LEVELS = [
     {  // level 11
         agents: [1,1,1, 10, 20, 30, 40, 50, 60, 70, 80, 90],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "That's pretty much it for the tips.\nThere are 20 levels in this version."
+        tip: "There are 20 levels in this version."
     },
     {  // level 12
         agents: [10, 10, 10, 20, 40, 40, 40, 40, 60, 60, 60, 90],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Slow is smooth. Smooth is fast."
+        tip: "The mines activator will deploy up \nto 3 proximity mines."
     },
     {  // level 13
         agents: [10, 10, 10, 20, 20, 20, 20, 20, 40, 50, 60, 70],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "These bots do not learn as we do, \n or at all actually."
+        tip: "The health activator will repair \none destroyed station."
     },
     {  // level 14
         agents: [10, 10, 20, 20, 20, 21, 34, 67, 67, 67, 76, 76],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Aim well commander."
+        tip: "The boost activator will increase \nmortar lethality."
     },
     {  // level 15
         agents: [10,10,10,10,10,1,1,1,1,11,1,1,11],
