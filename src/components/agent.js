@@ -1,7 +1,7 @@
 import * as BABYLON from '@babylonjs/core'
 import { AGENT_SENSOR_RADIUS, ARTIFACT_AREA, ARTIFACT_SIZE, 
         ARTIFACT_INTERACT_COEFF, phases, edge, AGENT_SIZE, ARTIFACT_TYPES, 
-        ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH } from './constants.js'
+        ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH, FIELD_EXTENTS } from './constants.js'
 import { getGroundElevation, randomRotation } from './utils.js'
 import { getAgentVerts, getTrucatedDodecahedron } from './geometry.js'
 import { getAgentMat, roundParticlecolors} from './materials.js'
@@ -432,7 +432,14 @@ export function addAgent(scene, health, position, heading) {
 
 function generateAgentPosition(scene) {
 
-    let agentPos =  new BABYLON.Vector3(0,0,0)
+    // north or south of origin
+    let dir = 1
+    if(Math.random() < 0.5)
+        dir = -1
+
+    let z = dir * Math.random() * FIELD_EXTENTS.zMax * .6
+
+    let agentPos =  new BABYLON.Vector3(0,0,z)
      
     agentPos.y = getGroundElevation(agentPos.x, agentPos.z, scene) + 0.1
 
