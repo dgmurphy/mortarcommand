@@ -28,20 +28,14 @@ Once loaded into the Babylon scene,  the scaling needed to be fixed due to the B
 handed coordinate system. The normals had to be flipped also.  All the other objects
 are BJS primitives from the provided polyhedra examples.
 
-TODO: Figure out whats going wrong in Edge. Also try some scene optimization and maybe look at using
-deterministicLockstep for framerate consistency.
 
 ## TODO
 * Spread spawn location
-* Activator creation system
+* Redo levels
 * Audio for activator expiration
-* Message panel for events
-* Station health activator
-* Mortar boost activator
-* Mortar boost mode
+* Help screen
 * Trailer
 * Merge changes for other boards
-* Controls updates
 * Redo insta images
 * Clean up README
 
