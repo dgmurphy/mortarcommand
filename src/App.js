@@ -9,6 +9,7 @@ import { addLevelControl } from './components/lifecycle.js'
 import { PACKAGE_POINTS_THRESH } from './components/constants.js'
 import * as BABYLON from '@babylonjs/core';
 
+const MC_VERSION = "12.14.2020"
 
 class Root extends Component {
 
@@ -32,6 +33,8 @@ class Root extends Component {
     this.handleUpdateGUIinfo = this.handleUpdateGUIinfo.bind(this)
     this.setPackageLoaded = this.setPackageLoaded.bind(this)
     
+    console.log("Mortarcommand Version: " + MC_VERSION)
+
   }
 
 
