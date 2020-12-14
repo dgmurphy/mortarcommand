@@ -110,7 +110,7 @@ function enableMortarBoost(scene) {
     scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(0.4,1,.45)
     scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(.2,.7,.2)
 
-    //mortarMat.emissiveColor =  new BABYLON.Color3(0.5,0.5,0)
+    //TODO update blast particles for more action & different color
     for (var r of scene.rounds) {
         r.meshes.particles.color1 = roundParticlecolorsBoost.particles_color1
         r.meshes.particles.color2 = roundParticlecolorsBoost.particles_color2
@@ -135,6 +135,7 @@ export function disableMortarBoost(scene) {
     scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(1,.97,.67)
     scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(1,1,1)
 
+    //TODO restore blast particles to regular values
     for (var r of scene.rounds) {
         r.meshes.particles.color1 = roundParticlecolors.particles_color1
         r.meshes.particles.color2 = roundParticlecolors.particles_color2
@@ -251,6 +252,8 @@ export function activator_aging(activator, scene) {
     let alpha_coeff
 
     if (age > MAX_AGE) {
+        // play error sound
+        scene.getSoundByName("power-off").play()
         destroy_activator(activator, scene)
     } else if (age > START_FADE_AGE) {
         alpha_coeff = 1 - ((age - START_FADE_AGE)/MAX_AGE)
