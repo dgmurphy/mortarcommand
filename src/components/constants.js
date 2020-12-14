@@ -1,24 +1,24 @@
 
 export const GAME_LEVELS = [
     { // level 1
-      agents: [ 100,100,100,100,100],   // initial health values      
+      agents: [100,100,100,100],   // initial health values      
       artifacts: { small: 1, med: 1, large: 2 },
       tip: "Tip: If things are moving a bit slowly, \nmake your browser window smaller."  
     },        
     {  // level 2
         agents: [ 100,100,100,100,100,100],
         artifacts: { small: 2, med: 1, large: 2},
-        tip: "Tip: Some bots are stronger than others."
+        tip: "Tip: When a hologram appears, shoot the activator \nat the pedestal base to unlock assets."
     },    
     {  // level 3
         agents: [ 100,100,100,100,100,100,100],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Tip: Destroy ore deposits to delay the bots."
+        tip: "Tip: When the green progress bar is full\nyour heavy mortar is ready (space-bar)"
     },    
     {  // level 4
         agents: [100,100,100,100,100,100,100,100 ],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Tip: When the green progress bar is full\nyour heavy mortar is ready (space-bar)"
+        tip: "Tip: Damaged bots will move more slowly."
     },    
     {  // level 5
         agents: [100,100,100,100,100,100,100,100, 100],
@@ -28,7 +28,7 @@ export const GAME_LEVELS = [
     {  // level 6
         agents: [ 100,100,100,100,100,100,100,100,100, 100],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Tip: Shoot the activator buttons below\n the holograms to unlock assets."
+        tip: "Tip: Destroy ore deposits to delay the bots."
     },    
     {  // level 7
         agents: [100,100,100,100,100,100,100,100,100,100,100,100 ],
@@ -43,7 +43,7 @@ export const GAME_LEVELS = [
     {  // level 9
         agents: [100,100,100,100,100,100,100,100,100,100,100,100 ],
         artifacts: { small: 2, med: 2, large: 3},
-        tip: "Tip: Damaged bots move more slowly."
+        tip: "Tip: Activators are created as your score increases."
     },
     {  // level 10
         agents: [100,100,100,100,100,100,100,100,100,100,100 ],
