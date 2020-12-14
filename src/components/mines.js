@@ -139,7 +139,7 @@ export function updateMines(scene) {
 
 function detonate(scene, mine) {
 
-    console.log("DETONATING " + mine.name)
+    //console.log("DETONATING " + mine.name)
     scene.getSoundByName("mine").play()
     mine.detonating = true
     mine.detonationFrame = scene.gameFrame

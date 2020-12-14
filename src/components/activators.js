@@ -38,6 +38,13 @@ function pickActivatorType(scene) {
             atypes.splice(idx, 1)
     }
 
+    // make station-repair more rare
+    if (Math.random() < 0.3) {
+        var idx = atypes.indexOf("health")
+        if (idx > -1)
+            atypes.splice(idx, 1)
+    }
+
     if (atypes.length === 0)
         return "none"
 
@@ -67,7 +74,7 @@ export function activatorChance(scene) {
         scene.activator_last_score = scene.gameScore
 
         var nextActivator = scene.gameScore + scene.activator_score_thresh
-        console.log("NEXT ACTIVATOR AT " + nextActivator)
+        //console.log("NEXT ACTIVATOR AT " + nextActivator)
     }
 
 }

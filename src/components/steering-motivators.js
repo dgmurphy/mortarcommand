@@ -51,7 +51,7 @@ export function locateArtifactMotivator(agentInfo) {
     // if my target index is no longer the minimum hotgrid value, get the new min index
     if ( agentInfo.hotGrid[agentInfo.gridTargetIdx] > hotGridMinVal ) {
 
-        console.log("agent " + agentInfo.name + " found grid " + agentInfo.gridTargetIdx)
+        //console.log("agent " + agentInfo.name + " found grid " + agentInfo.gridTargetIdx)
 
        /*  To prevent always finding the first min value in the hotgrid
             array, start the search at a random index. If the value is

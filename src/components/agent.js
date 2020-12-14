@@ -432,7 +432,7 @@ function generateAgentPosition(scene) {
     if(Math.random() < 0.5)
         dir = -1
 
-    let z = dir * Math.random() * FIELD_EXTENTS.zMax * .6
+    let z = dir * Math.random() * FIELD_EXTENTS.zMax * .8
 
     let agentPos =  new BABYLON.Vector3(0,0,z)
      
