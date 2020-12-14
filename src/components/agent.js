@@ -4,7 +4,7 @@ import { AGENT_SENSOR_RADIUS, ARTIFACT_AREA, ARTIFACT_SIZE,
         ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH, FIELD_EXTENTS } from './constants.js'
 import { getGroundElevation, randomRotation } from './utils.js'
 import { getAgentVerts, getTrucatedDodecahedron } from './geometry.js'
-import { getAgentMat, roundParticlecolors} from './materials.js'
+import { getAgentMat, roundParticlecolors, blastParticlesProps} from './materials.js'
 
 
 function makeArtifact(name, size, scene) {
@@ -199,22 +199,17 @@ function makeRound(name, scene) {
     /* create particles for detonation */
     var blastParticles = new BABYLON.GPUParticleSystem(name + "_blastparticles", { capacity: 800 }, scene);
     var hemisphericEmitter = blastParticles.createHemisphericEmitter(1);
-    let blastColors = {
-        particles_color1: new BABYLON.Color4(.6,.2,.2,1),
-        particles_color2: new BABYLON.Color4(.3, .1, .3, 1.0),
-        particles_colorDead: new BABYLON.Color4(0.3, 0, 0, 0.0)
-    }   
     blastParticles.particleTexture = flareTexture
     blastParticles.emitter = particleOrigin;
-    blastParticles.minSize = 0.05;
-    blastParticles.maxSize = 0.3;
-    blastParticles.maxLifeTime = .003
-    blastParticles.color1 = blastColors.particles_color1
-    blastParticles.color2 = blastColors.particles_color2
-    blastParticles.colorDead = blastColors.particles_colorDead
-    blastParticles.emitRate = 300;
-    blastParticles.minEmitPower = 1;
-    blastParticles.maxEmitPower = 6;
+    blastParticles.minSize = blastParticlesProps.minSize;
+    blastParticles.maxSize = blastParticlesProps.maxSize;
+    blastParticles.maxLifeTime = blastParticlesProps.maxLifeTime
+    blastParticles.color1 = blastParticlesProps.color1
+    blastParticles.color2 = blastParticlesProps.color2
+    blastParticles.colorDead = blastParticlesProps.colorDead
+    blastParticles.emitRate = blastParticlesProps.emitRate;
+    blastParticles.minEmitPower = blastParticlesProps.minEmitPower;
+    blastParticles.maxEmitPower = blastParticlesProps.maxEmitPower;
     blastParticles.preWarmCycles = 100;
     blastParticles.preWarmStepOffset = 5;    
 

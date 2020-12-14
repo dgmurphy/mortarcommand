@@ -1,6 +1,7 @@
 import * as BABYLON from '@babylonjs/core'
 import { getGroundElevation } from './utils.js'
-import { holomat, roundParticlecolors, roundParticlecolorsBoost } from './materials.js'
+import { holomat, roundParticlecolors, roundParticlecolorsBoost,
+    blastParticlesProps, blastParticlesPropsBoost } from './materials.js'
 import { deployMines } from './mines.js'
 import { repairOneStation } from './station.js'
 
@@ -110,12 +111,21 @@ function enableMortarBoost(scene) {
     scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(0.4,1,.45)
     scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(.2,.7,.2)
 
-    //TODO update blast particles for more action & different color
+   
     for (var r of scene.rounds) {
         r.meshes.particles.color1 = roundParticlecolorsBoost.particles_color1
         r.meshes.particles.color2 = roundParticlecolorsBoost.particles_color2
         r.meshes.particles.colorDead = roundParticlecolorsBoost.particles_colorDead
         r.meshes.bullet.scaling = new BABYLON.Vector3(0.08, 0.9, 0.08);
+        r.meshes.blastParticles.minSize = blastParticlesPropsBoost.minSize
+        r.meshes.blastParticles.maxSize = blastParticlesPropsBoost.maxSize
+        r.meshes.blastParticles.maxLifeTime = blastParticlesPropsBoost.maxLifeTime    
+        r.meshes.blastParticles.color1 = blastParticlesPropsBoost.color1    
+        r.meshes.blastParticles.color2 = blastParticlesPropsBoost.color2    
+        r.meshes.blastParticles.colorDead = blastParticlesPropsBoost.colorDead    
+        r.meshes.blastParticles.emitRate = blastParticlesPropsBoost.emitRate    
+        r.meshes.blastParticles.minEmitPower = blastParticlesPropsBoost.minEmitPower    
+        r.meshes.blastParticles.maxEmitPower = blastParticlesPropsBoost.maxEmitPower    
     }
 
     scene.BLAST_DAMAGE_COEFF = 9
@@ -135,12 +145,21 @@ export function disableMortarBoost(scene) {
     scene.getMaterialByName("blastMat").diffuseColor =  new BABYLON.Color3(1,.97,.67)
     scene.getMaterialByName("packageMat").diffuseColor =  new BABYLON.Color3(1,1,1)
 
-    //TODO restore blast particles to regular values
+    
     for (var r of scene.rounds) {
         r.meshes.particles.color1 = roundParticlecolors.particles_color1
         r.meshes.particles.color2 = roundParticlecolors.particles_color2
         r.meshes.particles.colorDead = roundParticlecolors.particles_colorDead
         r.meshes.bullet.scaling = new BABYLON.Vector3(0.05, 0.6, 0.05);
+        r.meshes.blastParticles.minSize = blastParticlesProps.minSize
+        r.meshes.blastParticles.maxSize = blastParticlesProps.maxSize
+        r.meshes.blastParticles.maxLifeTime = blastParticlesProps.maxLifeTime    
+        r.meshes.blastParticles.color1 = blastParticlesProps.color1    
+        r.meshes.blastParticles.color2 = blastParticlesProps.color2    
+        r.meshes.blastParticles.colorDead = blastParticlesProps.colorDead    
+        r.meshes.blastParticles.emitRate = blastParticlesProps.emitRate    
+        r.meshes.blastParticles.minEmitPower = blastParticlesProps.minEmitPower    
+        r.meshes.blastParticles.maxEmitPower = blastParticlesProps.maxEmitPower    
     }
 
     scene.BLAST_DAMAGE_COEFF = 3

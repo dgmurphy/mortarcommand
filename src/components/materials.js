@@ -16,6 +16,31 @@ export const  roundParticlecolorsBoost = {
     particles_colorDead: new BABYLON.Color4(0.1, 0.3, 0, 0.0)
 }   
 
+export const blastParticlesProps = {
+    minSize: .05,
+    maxSize: .3,
+    maxLifeTime: .003,
+    color1: new BABYLON.Color4(.6,.2,.2,1),
+    color2: new BABYLON.Color4(.3, .1, .3, 1.0),
+    colorDead: new BABYLON.Color4(0.3, 0, 0, 0.0),
+    emitRate: 300,
+    minEmitPower: 1,
+    maxEmitPower: 6
+}
+
+export const blastParticlesPropsBoost = {
+    minSize: .05,
+    maxSize: .32,
+    maxLifeTime: .005,
+    color1: new BABYLON.Color4(.7,.1,.1,1),
+    color2: new BABYLON.Color4(.3, .1, .3, 1.0),
+    colorDead: new BABYLON.Color4(0, 0.1, 0, 0.0),
+    emitRate: 800,
+    minEmitPower: 1,
+    maxEmitPower: 20
+
+}
+
 
 
 export function createMaterials(scene) {
