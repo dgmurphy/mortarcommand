@@ -32,6 +32,7 @@ function pickActivatorType(scene) {
     if (scene.mortarBoost == false)
         atypes.push("bolt")
 
+
     if (atypes.length === 0)
         return "none"
 
