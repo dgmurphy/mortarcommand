@@ -18,15 +18,19 @@ function pickActivatorType(scene) {
 
     var atypes = []
 
-    if (scene.liveStations < 3)
-        atypes.push("health")
+    // if down to one station, pick station health
+    if (scene.liveStations == 1) {
+        return "health"
+    }
+
+    // if (scene.liveStations < 3)
+    //     atypes.push("health")
     
     if (scene.mines.length < 3)
         atypes.push("mine")
 
     if (scene.mortarBoost == false)
         atypes.push("bolt")
-
 
     if (atypes.length === 0)
         return "none"
@@ -39,11 +43,11 @@ function pickActivatorType(scene) {
     }
 
     // make station-repair more rare
-    if (Math.random() < 0.3) {
-        var idx = atypes.indexOf("health")
-        if (idx > -1)
-            atypes.splice(idx, 1)
-    }
+    // if (Math.random() < 0.3) {
+    //     var idx = atypes.indexOf("health")
+    //     if (idx > -1)
+    //         atypes.splice(idx, 1)
+    // }
 
     if (atypes.length === 0)
         return "none"
