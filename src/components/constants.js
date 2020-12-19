@@ -152,6 +152,14 @@ export const FIELD_EXTENTS = {
                 zMin: -14.6
            }
 
+// limits for detonations
+export const ROUND_EXTENTS = {
+    xMax: 27.6,
+    xMin: -27.6,
+    zMax: 17.6,
+    zMin: -17.6    
+}
+
 export const GUTTER_WIDTH = 2  // for edge steer
 
 export const edge = {
@@ -192,7 +200,6 @@ export const GUN_RANGE = 24.0
 export const GUN_VELOCITY = 1
 export const MORTAR_VELOCITY = 0.55
 export const PACKAGE_VELOCITY = 0.3
-export const MORTAR_YPEAK = 7
 export const GUN_POSITION = {
     x: 24,
     y: 7,
@@ -219,9 +226,14 @@ export const GAME_PHASES = {
 // points to load the heavy mortar
 export const PACKAGE_POINTS_THRESH = 12000
 
-//export const TERRAIN_MESH_NAME = "Ntc Import Obj"
-export const TERRAIN_MESH_NAME = "TerrainMesh_primitive0"
 
-// how long mortar boost lasts
+
+export  const AGENT_TRAIL_COLOR1 =  [.5, .5, 0.3, 1.0]
+export  const AGENT_TRAIL_COLOR2 =  [.4, .4, 0.2, 1.0]
+export  const AGENT_TRAIL_COLOR_DEAD = [0.3, 0.1, 0, 0.0]
+
+export const WATER_TRAIL_COLOR1 = [.5, .5, 1, 1.0]
+export const WATER_TRAIL_COLOR2 = [.2, .25, .4, 1.0]
+export const WATER_TRAIL_COLOR_DEAD = [0, .1, .3, 1.0]
+
 export const MORTAR_BOOST_LIFE = 1000
-

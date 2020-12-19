@@ -124,25 +124,25 @@ function makePowerStation(name, scene) {
     scene.beginAnimation(innerCore, 0, 60, true)
 
     /* damage particles */
-    var damageParticles = new BABYLON.GPUParticleSystem(name + "_damageparticles", { capacity: 900 }, scene);
-    var sphereEmitter = damageParticles.createSphereEmitter(1.2);
-    let damageColors = {
-        particles_color1: new BABYLON.Color4(.2,.45,.15, 1),
-        particles_color2: new BABYLON.Color4(1, 1, 1, 1.0),
-        particles_colorDead: new BABYLON.Color4(0, .1, 0, 0.0)
-    }   
-    damageParticles.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
-    damageParticles.emitter = innerCore;
-    damageParticles.minSize = 0.01;
-    damageParticles.maxSize = 0.2;
-    damageParticles.maxLifeTime = 1
-    damageParticles.color1 = damageColors.particles_color1
-    damageParticles.color2 = damageColors.particles_color2
-    damageParticles.colorDead = damageColors.particles_colorDead
-    damageParticles.emitRate = 300;
-    damageParticles.minEmitPower = .1;
-    damageParticles.maxEmitPower = 9;
-    damageParticles.gravity = new BABYLON.Vector3(0, -20, 0); 
+    // var damageParticles = new BABYLON.GPUParticleSystem(name + "_damageparticles", { capacity: 900 }, scene);
+    // var sphereEmitter = damageParticles.createSphereEmitter(1.2);
+    // let damageColors = {
+    //     particles_color1: new BABYLON.Color4(.2,.45,.15, 1),
+    //     particles_color2: new BABYLON.Color4(1, 1, 1, 1.0),
+    //     particles_colorDead: new BABYLON.Color4(0, .1, 0, 0.0)
+    // }   
+    // damageParticles.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    // damageParticles.emitter = innerCore;
+    // damageParticles.minSize = 0.01;
+    // damageParticles.maxSize = 0.2;
+    // damageParticles.maxLifeTime = 1
+    // damageParticles.color1 = damageColors.particles_color1
+    // damageParticles.color2 = damageColors.particles_color2
+    // damageParticles.colorDead = damageColors.particles_colorDead
+    // damageParticles.emitRate = 300;
+    // damageParticles.minEmitPower = .1;
+    // damageParticles.maxEmitPower = 9;
+    // damageParticles.gravity = new BABYLON.Vector3(0, -20, 0); 
 
 
     return { CoT: CoT, 
@@ -150,7 +150,8 @@ function makePowerStation(name, scene) {
              anim: animationCore, 
              shell: core,
              innerCore: innerCore,
-             particles: damageParticles }
+             //particles: damageParticles 
+            }
     
 }
 
@@ -168,9 +169,9 @@ export function updatePowerStationGraphics( station, scene ) {
     var s = ((0.78/11) * (damage)) + 1.2
     station.innerCore.scaling = new BABYLON.Vector3(s,s,s)
 
-    if (damage > 3) {
-        station.particles.start()
-    }
+    // if (damage > 3) {
+    //     station.particles.start()
+    // }
 
 
 }
@@ -388,7 +389,7 @@ export function destroyStation(station, scene, handleUpdateGUIinfo) {
 
     if(idx > -1) {
         scene.powerStations[idx].mesh.dispose()
-        scene.powerStations[idx].particles.dispose()
+        //scene.powerStations[idx].particles.dispose()
         scene.powerStations.splice(idx, 1)
     }    
 

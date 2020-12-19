@@ -3,7 +3,10 @@ import { getAngle, getGroundRange } from './utils.js'
 import { FRAMETHRESH_GUI, FIELD_EXTENTS, phases, edge, 
         STATION_MAX_HEALTH, hotgrid, GUTTER_WIDTH, AGENT_SENSOR_RADIUS,
         AGENT_MAX_SPEED, AGENT_MAX_HEALTH, AGENT_MIN_SPEED,
-        TERRAIN_MESH_NAME, MORTAR_BOOST_LIFE} from './constants.js'
+        TERRAIN_MESH_NAME, WATER_TRAIL_COLOR1,
+        WATER_TRAIL_COLOR2, WATER_TRAIL_COLOR_DEAD,
+        AGENT_TRAIL_COLOR1, AGENT_TRAIL_COLOR2, 
+        AGENT_TRAIL_COLOR_DEAD, MORTAR_BOOST_LIFE} from './constants.js'
 import { randomSteerMotivator, seekZoneMotivator, locateArtifactMotivator,
          moveToTargetMotivator, avoidEdgeMotivator } from './steering-motivators.js'
 import { setModeInputs } from './mode-utils.js'
@@ -141,8 +144,11 @@ export function drive(agentInfo) {
     //console.log("ds: " + ds)
 
     // size particle trail
-    let particlePower = 100   // TODO GUI control
-    particles.maxEmitPower = particlePower * ds
+    //let particlePower = 100   // TODO GUI control
+    //particles.maxEmitPower = particlePower * ds
+
+    // colorize & size particle trail
+    colorizeParticles(agentPos, particles, ds)
 
     // Keep the agent inside terrian extents
     let testx = agentPos.x + ds * hvecx
@@ -159,6 +165,77 @@ export function drive(agentInfo) {
     return pos
 }
 
+
+function colorizeParticles(agentPos, particles, ds) {
+
+    var color1, color2, colorDead, particlePower
+
+    if(isOverWater(agentPos)) {
+
+        particlePower =  200
+
+        color1 =  new BABYLON.Color4(WATER_TRAIL_COLOR1[0],
+            WATER_TRAIL_COLOR1[1],
+            WATER_TRAIL_COLOR1[2],
+            WATER_TRAIL_COLOR1[3])
+
+        color2 =  new BABYLON.Color4(WATER_TRAIL_COLOR2[0],
+            WATER_TRAIL_COLOR2[1],
+            WATER_TRAIL_COLOR2[2],
+            WATER_TRAIL_COLOR2[3])
+
+        colorDead =  new BABYLON.Color4(WATER_TRAIL_COLOR_DEAD[0],
+            WATER_TRAIL_COLOR_DEAD[1],
+            WATER_TRAIL_COLOR_DEAD[2],
+            WATER_TRAIL_COLOR_DEAD[3])
+
+    } else {
+
+        particlePower = 100
+
+        color1 =  new BABYLON.Color4(AGENT_TRAIL_COLOR1[0],
+            AGENT_TRAIL_COLOR1[1],
+            AGENT_TRAIL_COLOR1[2],
+            AGENT_TRAIL_COLOR1[3])
+
+        color2 =  new BABYLON.Color4(WATER_TRAIL_COLOR2[0],
+            AGENT_TRAIL_COLOR2[1],
+            AGENT_TRAIL_COLOR2[2],
+            AGENT_TRAIL_COLOR2[3])
+
+        colorDead =  new BABYLON.Color4(WATER_TRAIL_COLOR_DEAD[0],
+            AGENT_TRAIL_COLOR_DEAD[1],
+            AGENT_TRAIL_COLOR_DEAD[2],
+            AGENT_TRAIL_COLOR_DEAD[3])
+
+    }
+
+    particles.color1 = color1
+    particles.color2 = color2
+    particles.colorDead = colorDead
+
+    particles.maxEmitPower = particlePower * ds
+
+
+}
+
+function isOverWater(agentPos) {
+
+    let waterBox = {
+        xMax: 12,
+        xMin: -4,
+        zMax: 8,
+        zMin: -11.5
+    }
+
+    // TODO Contants for water locations
+    if ((agentPos.x < waterBox.xMax) &&
+        (agentPos.x > waterBox.xMin)) {
+            return true
+        }
+
+    return false
+}
 
 export function anim(agentInfo, terrainMesh) {
 

@@ -1,7 +1,8 @@
 import * as BABYLON from '@babylonjs/core'
 import { AGENT_SENSOR_RADIUS, ARTIFACT_AREA, ARTIFACT_SIZE, 
         ARTIFACT_INTERACT_COEFF, phases, edge, AGENT_SIZE, ARTIFACT_TYPES, 
-        ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH, FIELD_EXTENTS } from './constants.js'
+        ROUND_PHASES, AGENT_MAX_HEALTH, ARTIFACT_MAX_HEALTH, AGENT_TRAIL_COLOR1,
+        AGENT_TRAIL_COLOR2, AGENT_TRAIL_COLOR_DEAD, FIELD_EXTENTS } from './constants.js'
 import { getGroundElevation, randomRotation } from './utils.js'
 import { getAgentVerts, getTrucatedDodecahedron } from './geometry.js'
 import { getAgentMat, roundParticlecolors, blastParticlesProps} from './materials.js'
@@ -14,6 +15,7 @@ function makeArtifact(name, size, scene) {
     var coreSize = size * ARTIFACT_SIZE
     var coreMesh = BABYLON.MeshBuilder.CreatePolyhedron(coreName, { type: 2, size: coreSize }, scene);
     coreMesh.rotationQuaternion = randomRotation()
+    coreMesh.material = scene.getMaterialByName("artifactCoreMat")
 
     var shellRadius = coreSize * ARTIFACT_INTERACT_COEFF
     var shellMesh =  BABYLON.MeshBuilder.CreateIcoSphere("icosphere", {radius:shellRadius, subdivisions: 4}, scene)
@@ -199,6 +201,7 @@ function makeRound(name, scene) {
     /* create particles for detonation */
     var blastParticles = new BABYLON.GPUParticleSystem(name + "_blastparticles", { capacity: 800 }, scene);
     var hemisphericEmitter = blastParticles.createHemisphericEmitter(1);
+      
     blastParticles.particleTexture = flareTexture
     blastParticles.emitter = particleOrigin;
     blastParticles.minSize = blastParticlesProps.minSize;
@@ -312,9 +315,18 @@ function makeAgent(name, health, position, scene) {
     var particleSystem = new BABYLON.GPUParticleSystem(name + "_particles", { capacity: 600 }, scene);
 
     let colors = {
-        particles_color1: new BABYLON.Color4(.5, .5, 0.3, 1.0),
-        particles_color2: new BABYLON.Color4(.4, .4, 0.2, 1.0),
-        particles_colorDead: new BABYLON.Color4(0.3, 0.1, 0, 0.0)
+        particles_color1: new BABYLON.Color4(AGENT_TRAIL_COLOR1[0],
+                                             AGENT_TRAIL_COLOR1[1],
+                                             AGENT_TRAIL_COLOR1[2],
+                                             AGENT_TRAIL_COLOR1[3]),
+        particles_color2: new BABYLON.Color4(AGENT_TRAIL_COLOR2[0],
+                                             AGENT_TRAIL_COLOR2[1],
+                                             AGENT_TRAIL_COLOR2[2],
+                                             AGENT_TRAIL_COLOR2[3]),
+        particles_colorDead: new BABYLON.Color4(AGENT_TRAIL_COLOR_DEAD[0],
+                                                AGENT_TRAIL_COLOR_DEAD[1],
+                                                AGENT_TRAIL_COLOR_DEAD[2],
+                                                AGENT_TRAIL_COLOR_DEAD[3])
     }   
 
     let flareTexture = new BABYLON.Texture("textures/flare.png", scene);

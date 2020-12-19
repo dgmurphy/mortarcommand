@@ -4,6 +4,7 @@ import BabylonScene from '../components/babylon-scene'; // import the component 
 import { GAME_PHASES } from '../components/constants.js'
 import { addFireListener } from './mortars.js'
 import { addDebugListener } from './lifecycle.js'
+import { MC_NUM_LIGHTS, MC_LIGHT1_POS, MC_LIGHT2_POS, MC_LIGHT1_INTENSITY, MC_LIGHT2_INTENSITY } from './per-table-constants.js'
 import '@babylonjs/gui'
 //import '@babylonjs/inspector'
 
@@ -34,10 +35,18 @@ export default class Viewer extends Component {
         camera.keysLeft = []
         camera.keysRight = []
 
-        // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-        const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0.2, 1, 0.2), scene);
-        // Default intensity is 1. Let's dim the light a small amount
-        light.intensity = 1;
+	//LIGHTS
+	const light1 = new BABYLON.HemisphericLight("light1", 
+		new BABYLON.Vector3(MC_LIGHT1_POS[0], MC_LIGHT1_POS[1], MC_LIGHT1_POS[2]), 
+		scene);
+        light1.intensity = MC_LIGHT1_INTENSITY
+
+	if (MC_NUM_LIGHTS > 1) {
+		const light2 = new BABYLON.PointLight("pointLight", 
+		new BABYLON.Vector3(MC_LIGHT2_POS[0], MC_LIGHT2_POS[1], MC_LIGHT2_POS[2]), 
+		scene);
+		light2.intensity = MC_LIGHT2_INTENSITY
+	}
 
         this.props.setScene(scene);
         //document.getElementById('renderCanvas').focus();  

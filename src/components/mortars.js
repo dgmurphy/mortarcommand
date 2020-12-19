@@ -7,7 +7,8 @@ import { MORTAR_VELOCITY, MORTAR_YPEAK, ROUND_PHASES,
    BLAST_ALPHA, MORTAR_BLAST_RADIUS_START, MORTAR_BLAST_LIFE, 
    GUN_BLAST_LIFE, GUN_BLAST_RADIUS_START,
    POINTS_AGENT_HIT, ARTIFACT_MAX_HEALTH, POINTS_ARTIFACT_HIT,
-   GAME_PHASES, PACKAGE_VELOCITY, TERRAIN_MESH_NAME} from './constants.js'
+   GAME_PHASES, PACKAGE_VELOCITY, ROUND_EXTENTS} from './constants.js'
+import { TERRAIN_MESH_NAME, CHANGE_LIGHT_ON_BLAST } from './per-table-constants.js'
 import { destroyAgent, addArtifact } from './agent.js'
 import { handleLevelComplete } from './lifecycle.js'
 import { getAgentMat } from './materials.js'
@@ -41,9 +42,16 @@ function hasHitGround(pos, scene) {
   if (pos.y > 5)
     return false
 
-  // failsafe check
-  if (pos.y < 0)
+  // check if round has gone beyond the playfield
+  if ( (pos.x > ROUND_EXTENTS.xMax) ||
+       (pos.x > ROUND_EXTENTS.xMax) ||
+       (pos.z > ROUND_EXTENTS.zMax) ||
+       (pos.z < ROUND_EXTENTS.zMin) ||
+       (pos.y < 0)
+  ) {
     return true
+  }
+
 
    // Casting a ray to get height
    let terrainMesh = scene.getMeshByName(TERRAIN_MESH_NAME)
@@ -141,8 +149,9 @@ export function updateThePackage(scene) {
 
     if (tp.blastAge > tp.blastLife) {  // end of life
 
-      scene.getLightByName("light1").diffuse = new BABYLON.Color3.White
-      //scene.clearColor = new BABYLON.Color3(0.38, 0.36, 0.41);
+      if (CHANGE_LIGHT_ON_BLAST)
+      	scene.getLightByName("light1").diffuse = new BABYLON.Color3.White
+
 
       tp.blastAge = 0
       tp.phase = ROUND_PHASES.ready
@@ -174,8 +183,8 @@ export function updateThePackage(scene) {
 
       if (hasHitGround(tp.pos, scene)) {
 
-        scene.getLightByName("light1").diffuse = new BABYLON.Color3(1,.8, 0.8)
-        //scene.clearColor = new BABYLON.Color3.Red
+	if (CHANGE_LIGHT_ON_BLAST)
+        	scene.getLightByName("light1").diffuse = new BABYLON.Color3(1,.8, 0.8)
 
         scene.getSoundByName("heavyMortar").play() 
         tp.phase = ROUND_PHASES.detonated
@@ -561,9 +570,9 @@ export function killAgent(agent, scene) {
   const idx = scene.agents.findIndex( hasName )
 
   if(idx > -1) {
-    //scene.agents[idx].meshes.body.dispose()
-    //scene.agents[idx].meshes.particles.dispose()
-    //scene.agents[idx].meshes.cargo.dispose()
+    scene.agents[idx].meshes.body.dispose()
+    scene.agents[idx].meshes.particles.dispose()
+    scene.agents[idx].meshes.cargo.dispose()
     scene.agents.splice(idx, 1)    
   }
 

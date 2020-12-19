@@ -8,7 +8,7 @@ import { createMaterials } from './materials.js'
 import { startAgentAnim } from './controllers.js';
 import { addRound, addThePackage } from './agent.js'
 import { makeBase} from './station.js'
-import { MAX_ROUNDS } from './constants.js'
+import { MAX_ROUNDS, MC_SCENE_CLEAR_COLOR } from './constants.js'
 import { addPowerStations } from './station.js'
 
 
@@ -109,7 +109,11 @@ export default class BabylonScene extends Component {
 
     let scene = new Scene(this.engine);
     this.scene = scene;
-    scene.clearColor = new BABYLON.Color3(0.38, 0.36, 0.41);
+    scene.clearColor = new BABYLON.Color3(
+		MC_SCENE_CLEAR_COLOR[0],
+		MC_SCENE_CLEAR_COLOR[1],
+		MC_SCENE_CLEAR_COLOR[2]
+		);
     createMaterials( scene )
     
     // Load environment & terrain

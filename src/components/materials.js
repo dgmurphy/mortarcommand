@@ -137,6 +137,8 @@ export function createMaterials(scene) {
     let innerPowerCoreBrokenMat = new BABYLON.StandardMaterial("innerPowerCoreBrokenMat", scene)
     innerPowerCoreBrokenMat.diffuseColor =  new BABYLON.Color3(.5,.5,.08)
     
+    let artifactCoreMat = new BABYLON.StandardMaterial("artifactCoreMat", scene)
+    artifactCoreMat.diffuseColor =  new BABYLON.Color3(.7,.7,.7)
 
     let artifactShellMat = new BABYLON.StandardMaterial("artifactShellMat", scene)
     artifactShellMat.emissiveColor = new BABYLON.Color3.Gray();
@@ -144,9 +146,6 @@ export function createMaterials(scene) {
     artifactShellMat.wireframe = true;
 
     let mortarMat = new BABYLON.StandardMaterial("mortarMat", scene)
-    //mortarMat.diffuseColor =  new BABYLON.Color3(.1,1,.1)
-    //mortarMat.emissiveColor =  new BABYLON.Color3(0,.3,0)
-
 
     let packageMat = new BABYLON.StandardMaterial("packageMat", scene)
 

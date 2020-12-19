@@ -1,20 +1,30 @@
 import * as GUI from '@babylonjs/gui/2D'
+import * as BABYLON from '@babylonjs/core'
 import { destroyAgent, addAgent, addArtifact } from './agent.js'
 import { addPowerStations, addPowerStation, placePowerStations, 
             removeStationWreckage } from './station.js'
-import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES,
-         TERRAIN_MESH_NAME } from './constants.js'
+import { GAME_PHASES, GAME_LEVELS, ARTIFACT_TYPES } from './constants.js'
+import { TERRAIN_MESH_NAME, LEVELS_MODE } from './per-table-constants.js'
 import { deployMines, placeMines, clearMines } from './mines.js'
+import { randn_bm } from './utils'
 import { addActivator, clearActivators } from './activators.js'
 
 
 export function handleLevelComplete(scene) {
 
-    if (scene.gameLevel < (GAME_LEVELS.length - 1)) {
-        scene.gameLevel += 1
-    }
-    else {
-        scene.gameLevel = 0   // out of levels, reset 
+    if (LEVELS_MODE === 'manual') {
+
+        if (scene.gameLevel < (GAME_LEVELS.length - 1)) {
+            scene.gameLevel += 1
+        }
+        else {
+            scene.gameLevel = 0   // out of levels, reset 
+        }
+
+    } else {
+
+        scene.gameLevel += 1   // infinite levels in auto mode
+
     }
 
     addLevelControl(scene)
@@ -154,7 +164,8 @@ export function addLevelControl(scene) {
  
 
     /* ---------- Render Babylonjs GUI --------------------- */
-
+    let levelData = getLevelData(scene)
+    
     var advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI")
 
     var panel = new GUI.Rectangle()
@@ -175,7 +186,7 @@ export function addLevelControl(scene) {
     advancedTexture.addControl(text1);    
 
     var text2 = new GUI.TextBlock();
-    text2.text = GAME_LEVELS[gameLevel].tip
+    text2.text = levelData.tip
     text2.color = "white";
     text2.fontSize = 14;
     text2.top = "-10px"
@@ -203,30 +214,139 @@ export function addLevelControl(scene) {
         advancedTexture.dispose()
         
         /* -------- Build new objects for this level ------- */
- 
-
-        // add agents
-        for (var agentHealth of GAME_LEVELS[gameLevel].agents) {
-            addAgent(scene, agentHealth)                  
-        }
-
-        // add artifacts  TODO for the orientation level, place them manually
-        var i
-        for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.small; ++i) {
-            addArtifact(scene, ARTIFACT_TYPES.small)
-        }
-        for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.med; ++i) {
-            addArtifact(scene, ARTIFACT_TYPES.medium)
-        }
-        for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.large; ++i) {
-            addArtifact(scene, ARTIFACT_TYPES.large)
-        }
+        makeLevel(scene, levelData)
 
         scene.gamePhase = GAME_PHASES.playing
 
     });
 
     advancedTexture.addControl(button)   
+
+}
+
+function getLevelData(scene) {
+
+    if (LEVELS_MODE === 'auto')
+        return autoLevelData(scene)
+    else
+        return manualLevelData()
+}
+
+// Get the variables for the level (to inform level gui)
+function autoLevelData(scene) {
+
+    //let max_bots = 20
+
+    let levelData = {
+        agents: [],
+        artifacts: [],
+        tip: ""
+    }
+
+    let totalHealth = 0
+    
+    // sample number of agents 
+    let numbots = scene.gameLevel + 1
+    numbots += Math.floor(Math.random() * 5)
+
+    //let numbots = Math.ceil(Math.random() * max_bots)
+
+    // limit agent health
+    //let max_agent_health = 100
+    
+    // assign agent health (skew towards lower vals, and create agent
+    for (var i = 0; i < numbots; ++i) {
+        //let agentHealth = Math.ceil(Math.random() * max_agent_health)
+        let agentHealth = 75 + (Math.ceil(Math.random() * 25))
+        totalHealth += agentHealth
+        levelData.agents.push(agentHealth)
+        
+    }
+
+    // let healthPercent = (totalHealth / (max_bots * 100)) * 100
+    // healthPercent =  Math.floor(healthPercent)
+
+    // create 5-10 artifacts, random sizes
+    let numArtifacts = randn_bm(5, 10, 1.0)
+    numArtifacts = Math.floor(numArtifacts)
+
+    for (var j = 0; j < numArtifacts; j++) {
+
+        let s = Math.random()
+
+        if (s < 0.33)
+            levelData.artifacts.push(ARTIFACT_TYPES.small)
+        else if (s < 0.66)
+            levelData.artifacts.push(ARTIFACT_TYPES.medium)
+        else
+            levelData.artifacts.push(ARTIFACT_TYPES.large)
+    }    
+
+    // create level tip
+    // let levelDifficulty = ""
+    // if (totalHealth < 300)
+    //     levelDifficulty = "Cake Walk"
+    // else if (totalHealth < 500)
+    //     levelDifficulty = "Easy"
+    // else if (totalHealth < 1000)
+    //     levelDifficulty = "Medium"
+    // else if (totalHealth < 1500)
+    //     levelDifficulty = "Hard"
+    // else
+    //     levelDifficulty = "Very Hard"
+
+    let tip = "You will face " + numbots + " bots." 
+    tip += "\nTotal bot strength is " + totalHealth
+
+    levelData.tip = tip
+
+    return levelData
+}
+
+
+function manualLevelData(scene) {
+
+    let levelData = {
+        agents: [],
+        artifacts: [],
+        tip: ""
+    }   
+
+    let gameLevel = scene.gameLevel
+
+    for (var agentHealth of GAME_LEVELS[gameLevel].agents) {
+        levelData.agents.push(agentHealth)
+    }
+
+    // add artifacts  TODO for the orientation level, place them manually
+    var i
+    for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.small; ++i) {
+        levelData.artifacts.push(ARTIFACT_TYPES.small)
+    }
+    for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.med; ++i) {
+        levelData.artifacts.push(ARTIFACT_TYPES.medium)
+    }
+    for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.large; ++i) {
+        levelData.artifacts.push(ARTIFACT_TYPES.large)
+    }    
+
+    levelData.tip = GAME_LEVELS[gameLevel].tip
+
+    return levelData
+
+}
+
+function makeLevel(scene, levelData) {
+
+    let gameLevel = scene.gameLevel
+
+    for (var agentHealth of levelData.agents) {
+        addAgent(scene, agentHealth)
+    }
+
+    for (var artifactType of levelData.artifacts) {
+        addArtifact(scene, artifactType)
+    }
 
 }
 
