@@ -229,7 +229,7 @@ function getLevelData(scene) {
     if (LEVELS_MODE === 'auto')
         return autoLevelData(scene)
     else
-        return manualLevelData()
+        return manualLevelData(scene)
 }
 
 // Get the variables for the level (to inform level gui)

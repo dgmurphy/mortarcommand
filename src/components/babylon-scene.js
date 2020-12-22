@@ -8,7 +8,8 @@ import { createMaterials } from './materials.js'
 import { startAgentAnim } from './controllers.js';
 import { addRound, addThePackage } from './agent.js'
 import { makeBase} from './station.js'
-import { MAX_ROUNDS, MC_SCENE_CLEAR_COLOR } from './constants.js'
+import { MAX_ROUNDS } from './constants.js'
+import { MC_SCENE_CLEAR_COLOR } from './per-table-constants.js'
 import { addPowerStations } from './station.js'
 
 

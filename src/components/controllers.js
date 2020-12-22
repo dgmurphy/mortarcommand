@@ -2,8 +2,7 @@ import * as BABYLON from '@babylonjs/core';
 import { getAngle, getGroundRange } from './utils.js'
 import { FRAMETHRESH_GUI, FIELD_EXTENTS, phases, edge, 
         STATION_MAX_HEALTH, hotgrid, GUTTER_WIDTH, AGENT_SENSOR_RADIUS,
-        AGENT_MAX_SPEED, AGENT_MAX_HEALTH, AGENT_MIN_SPEED,
-        TERRAIN_MESH_NAME, WATER_TRAIL_COLOR1,
+        AGENT_MAX_SPEED, AGENT_MAX_HEALTH, AGENT_MIN_SPEED, WATER_TRAIL_COLOR1,
         WATER_TRAIL_COLOR2, WATER_TRAIL_COLOR_DEAD,
         AGENT_TRAIL_COLOR1, AGENT_TRAIL_COLOR2, 
         AGENT_TRAIL_COLOR_DEAD, MORTAR_BOOST_LIFE} from './constants.js'
@@ -14,6 +13,7 @@ import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
 import { updateMines } from './mines.js';
 import { activator_aging, activatorChance, disableMortarBoost } from './activators.js'
+import { TERRAIN_MESH_NAME } from './per-table-constants.js'
 
 
 

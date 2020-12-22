@@ -2,13 +2,13 @@
 import * as BABYLON from '@babylonjs/core';
 import * as GUI from '@babylonjs/gui/2D'
 import { getXZpos, getAngleOriented, getGroundRange} from './utils'
-import { MORTAR_VELOCITY, MORTAR_YPEAK, ROUND_PHASES,
-   GUN_POSITION, GUN_RANGE, ROUND_TYPES, GUN_VELOCITY, 
-   BLAST_ALPHA, MORTAR_BLAST_RADIUS_START, MORTAR_BLAST_LIFE, 
-   GUN_BLAST_LIFE, GUN_BLAST_RADIUS_START,
-   POINTS_AGENT_HIT, ARTIFACT_MAX_HEALTH, POINTS_ARTIFACT_HIT,
-   GAME_PHASES, PACKAGE_VELOCITY, ROUND_EXTENTS} from './constants.js'
-import { TERRAIN_MESH_NAME, CHANGE_LIGHT_ON_BLAST } from './per-table-constants.js'
+import { MORTAR_VELOCITY, ROUND_PHASES,
+         GUN_POSITION, GUN_RANGE, ROUND_TYPES, GUN_VELOCITY, 
+         BLAST_ALPHA, MORTAR_BLAST_RADIUS_START, MORTAR_BLAST_LIFE, 
+         GUN_BLAST_LIFE, GUN_BLAST_RADIUS_START,
+         POINTS_AGENT_HIT, ARTIFACT_MAX_HEALTH, POINTS_ARTIFACT_HIT,
+         GAME_PHASES, PACKAGE_VELOCITY, ROUND_EXTENTS} from './constants.js'
+import { TERRAIN_MESH_NAME, CHANGE_LIGHT_ON_BLAST, MORTAR_YPEAK} from './per-table-constants.js'
 import { destroyAgent, addArtifact } from './agent.js'
 import { handleLevelComplete } from './lifecycle.js'
 import { getAgentMat } from './materials.js'

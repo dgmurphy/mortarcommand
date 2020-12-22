@@ -2,7 +2,7 @@ export const MORTAR_YPEAK = 7
 export const TERRAIN_MESH_NAME = "TerrainMesh_primitive0"
 export const LEVELS_MODE = "manual"
 export const GLTF_FILE = "NTC_Draco.gltf"
-export const TABLE_XFORM = {
+export const MC_TABLE_XFORM = {
     pos: [-25, 2.5, 14.6],
     scale: [50, 100, -50]
 }

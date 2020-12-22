@@ -1,5 +1,5 @@
 import * as BABYLON from '@babylonjs/core';
-import { GLTF_FILE, TABLE_XFORM, TABLE_BACKGROUND_ALPHA } from './per-table-constants.js'
+import { GLTF_FILE, MC_TABLE_XFORM, TABLE_BACKGROUND_ALPHA } from './per-table-constants.js'
 
 
 function soundReady(soundTask) {
@@ -115,16 +115,21 @@ export function loadAssets(scene, updateAssetStatus) {
 
       // bjs is left handed coords, gltf is right handed
       newMeshes[0].scaling = new  BABYLON.Vector3(1, 1, -1);  
+
+      console.log(MC_TABLE_XFORM)
+
       //Looks like mesh 0 is the base box
       newMeshes[0].scaling = new  BABYLON.Vector3(
-		TABLE_XFORM.pos[0],
-		TABLE_XFORM.pos[1],
-		TABLE_XFORM.pos[2]);
+		    MC_TABLE_XFORM.scale[0],
+		    MC_TABLE_XFORM.scale[1],
+        MC_TABLE_XFORM.scale[2]);
+        
       newMeshes[0].addRotation(0, Math.PI, 0);
+
       newMeshes[0].position = new  BABYLON.Vector3(
-		TABLE_XFORM.scale[0],
-		TABLE_XFORM.scale[1],
-		TABLE_XFORM.scale[2])
+		    MC_TABLE_XFORM.pos[0],
+		    MC_TABLE_XFORM.pos[1],
+		    MC_TABLE_XFORM.pos[2])
 
       var terrain = newMeshes[1]
       terrain.updateFacetData();

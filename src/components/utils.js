@@ -1,5 +1,5 @@
 import * as BABYLON from '@babylonjs/core';
-import { TERRAIN_MESH_NAME } from './constants';
+import { TERRAIN_MESH_NAME } from './per-table-constants.js'
 
 
 export function randomRotation() {
