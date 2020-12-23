@@ -259,7 +259,6 @@ export function updateRounds(scene) {
         round.meshes.body.position = round.pos
         round.blastRadiusCurrent = 0
         scene.roundsReady += 1
-        ///round.meshes.target.isVisible = false
         round.meshes.target.dispose()
         round.meshes.blast.setEnabled(false)
         round.meshes.particles.stop()
@@ -434,7 +433,6 @@ function fireRound(e) {
 
     let mesh = round.meshes.bullet
     let rotationVec = new BABYLON.Vector3(0, -heading, -declination)
-    //mesh.rotate(BABYLON.Axis.Z, declination, BABYLON.Space.LOCAL);
     mesh.rotation = rotationVec
 
     // rotate the particles origin

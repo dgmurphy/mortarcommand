@@ -1,4 +1,3 @@
-//import * as BABYLON from 'babylonjs';
 import React, { Component } from 'react';
 import * as BABYLON from '@babylonjs/core';
 import { Engine, Scene } from '@babylonjs/core';
@@ -52,8 +51,6 @@ export default class BabylonScene extends Component {
   
   allAssetsLoaded(scene) {
 
-    /* Create other graphical game objects */
-
     // firing tower
     makeBase(scene)
 
@@ -96,7 +93,6 @@ export default class BabylonScene extends Component {
     this.allAssetsLoaded(scene)
 
   }
-
 
 
   componentDidMount () {

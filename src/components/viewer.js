@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as BABYLON from '@babylonjs/core';
-import BabylonScene from '../components/babylon-scene'; // import the component above linking to file we just created.
+import BabylonScene from '../components/babylon-scene';  
 import { GAME_PHASES } from '../components/constants.js'
 import { addFireListener } from './mortars.js'
 import { addDebugListener } from './lifecycle.js'
@@ -49,9 +49,7 @@ export default class Viewer extends Component {
 	}
 
         this.props.setScene(scene);
-        //document.getElementById('renderCanvas').focus();  
-
-    
+   
         // init the objects lists
         scene.artifacts = []
         scene.nextArtifactId = 0
@@ -64,7 +62,6 @@ export default class Viewer extends Component {
         scene.nextRoundId = 0
         scene.gameFrame = 0
         scene.gameStartFrame = 0
-        //scene.addAgentCounter = 0
         scene.gameScores = []
         scene.gameScore = 0
         scene.hiGameScore = 0

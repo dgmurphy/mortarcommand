@@ -63,8 +63,6 @@ export function createMaterials(scene) {
     holomat = new BABYLON.StandardMaterial("holomat", scene);
     holomat.backFaceCulling = false
     holomat.alpha = 1
-    //holomat.emissiveColor = new BABYLON.Color3(0,0,1);
-    //holomat.getAlphaFromRGB = true
     holomat.opacityTexture = new BABYLON.Texture("textures/scanlines_op.png", scene);
     holomat.emissiveTexture = new BABYLON.Texture("textures/scanlines.png", scene);
     holomat.diffuseTexture = new BABYLON.Texture("textures/scanlines.png", scene);
@@ -91,30 +89,24 @@ export function createMaterials(scene) {
 
     let mineRingMat = new BABYLON.StandardMaterial("mineRingMat", scene);
     mineRingMat.diffuseColor =  new BABYLON.Color3(.25,.25,.25)
-    //mineCoreRed.emissiveColor = new BABYLON.Color3.Red()
-
+ 
     let mineRingLitMat = new BABYLON.StandardMaterial("mineRingLitMat", scene);
     mineRingLitMat.diffuseColor =  new BABYLON.Color3(1,.2,1)
-    //mineRingLitMat.emissiveColor = new BABYLON.Color3(0.1,0,0.1)
-
+ 
     let blastMat = new BABYLON.StandardMaterial("blastMat", scene);
     blastMat.diffuseColor =  new BABYLON.Color3(1,.97,.67)
-    //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
     blastMat.alpha = 0.3
 
     let mineBlastMat = new BABYLON.StandardMaterial("mineBlastMat", scene);
     mineBlastMat.diffuseColor =  new BABYLON.Color3(1,.17,.97)
-    //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
     mineBlastMat.alpha = 0.3
 
     let psPylonsMat = new BABYLON.StandardMaterial("stationPylons_Lit", scene);
     psPylonsMat.diffuseColor =  new BABYLON.Color3(1,1,1)
     psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
-    //rmat.alpha = 0.5
 
     let psPylonsDarkMat = new BABYLON.StandardMaterial("stationPylons_Dark", scene);
     psPylonsDarkMat.diffuseColor =  new BABYLON.Color3(0,0,0)
-    //psPylonsMat.emissiveColor =  new BABYLON.Color3(.1,.2,.1)
 
     let agentMat = new BABYLON.StandardMaterial("agentMat", scene)
 

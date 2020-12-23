@@ -248,11 +248,6 @@ function autoLevelData(scene) {
     // sample number of agents 
     let numbots = scene.gameLevel + 1
     numbots += Math.floor(Math.random() * 5)
-
-    //let numbots = Math.ceil(Math.random() * max_bots)
-
-    // limit agent health
-    //let max_agent_health = 100
     
     // assign agent health (skew towards lower vals, and create agent
     for (var i = 0; i < numbots; ++i) {
@@ -262,9 +257,6 @@ function autoLevelData(scene) {
         levelData.agents.push(agentHealth)
         
     }
-
-    // let healthPercent = (totalHealth / (max_bots * 100)) * 100
-    // healthPercent =  Math.floor(healthPercent)
 
     // create 5-10 artifacts, random sizes
     let numArtifacts = randn_bm(5, 10, 1.0)
@@ -282,18 +274,6 @@ function autoLevelData(scene) {
             levelData.artifacts.push(ARTIFACT_TYPES.large)
     }    
 
-    // create level tip
-    // let levelDifficulty = ""
-    // if (totalHealth < 300)
-    //     levelDifficulty = "Cake Walk"
-    // else if (totalHealth < 500)
-    //     levelDifficulty = "Easy"
-    // else if (totalHealth < 1000)
-    //     levelDifficulty = "Medium"
-    // else if (totalHealth < 1500)
-    //     levelDifficulty = "Hard"
-    // else
-    //     levelDifficulty = "Very Hard"
 
     let tip = "You will face " + numbots + " bots." 
     tip += "\nTotal bot strength is " + totalHealth
@@ -318,7 +298,7 @@ function manualLevelData(scene) {
         levelData.agents.push(agentHealth)
     }
 
-    // add artifacts  TODO for the orientation level, place them manually
+    // add artifacts   
     var i
     for (i = 0; i < GAME_LEVELS[gameLevel].artifacts.small; ++i) {
         levelData.artifacts.push(ARTIFACT_TYPES.small)
@@ -471,5 +451,4 @@ function restoreStations(e) {
     
     }
 
-    //console.log("wrecked stations length: " + scene.wreckedStations.length)
 }

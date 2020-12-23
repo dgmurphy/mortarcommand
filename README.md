@@ -29,16 +29,6 @@ handed coordinate system. The normals had to be flipped also.  All the other obj
 are BJS primitives from the provided polyhedra examples.
 
 
-## TODO
-* Spread spawn location
-* Redo levels
-* Audio for activator expiration
-* Help screen
-* Trailer
-* Merge changes for other boards
-* Redo insta images
-* Clean up README
-
 ## Available Scripts
 
 In the project directory, you can run:

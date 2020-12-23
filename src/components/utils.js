@@ -19,7 +19,6 @@ export function randomRotation() {
 }
 
 
-// TODO make sure this only uses the terrain mesh for ray intersection
 export function getGroundElevation(x, z, scene) {
 
   // Find y location  on terrain

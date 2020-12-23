@@ -368,8 +368,6 @@ export function destroyMine(mine, scene) {
         scene.mines.splice(idx, 1)
     }    
 
-    //if (scene.mines.length == 0)
-    //    deployMines(scene)
 
 }
 

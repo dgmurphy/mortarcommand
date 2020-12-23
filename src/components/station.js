@@ -365,7 +365,6 @@ export function addPowerStationWreckage(scene, station) {
     let name = station.name + "_wreck"
     let ps = makePowerStationWreckage(name, scene)
     ps.shell.position = new BABYLON.Vector3(station.pos.x, station.pos.y - .4, station.pos.z)
-    // TODO add a small random rotation for the shell
 
     let powerStationWreck = {
         name: name,
@@ -393,9 +392,6 @@ export function destroyStation(station, scene, handleUpdateGUIinfo) {
         scene.powerStations.splice(idx, 1)
     }    
 
-    // if (scene.powerStations.length === 0) {  // GAME OVER
-    //     handleGameOver(scene, handleUpdateGUIinfo)
-    // } 
 }
 
 

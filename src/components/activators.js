@@ -22,16 +22,12 @@ function pickActivatorType(scene) {
     if (scene.liveStations == 1) {
         return "health"
     }
-
-    // if (scene.liveStations < 3)
-    //     atypes.push("health")
     
     if (scene.mines.length < 3)
         atypes.push("mine")
 
     if (scene.mortarBoost == false)
         atypes.push("bolt")
-
 
     if (atypes.length === 0)
         return "none"
@@ -42,13 +38,6 @@ function pickActivatorType(scene) {
         if (idx > -1)
             atypes.splice(idx, 1)
     }
-
-    // make station-repair more rare
-    // if (Math.random() < 0.3) {
-    //     var idx = atypes.indexOf("health")
-    //     if (idx > -1)
-    //         atypes.splice(idx, 1)
-    // }
 
     if (atypes.length === 0)
         return "none"
@@ -233,14 +222,12 @@ function makeActivator(name, activator_type, scene) {
 
     //let holomat = scene.getMaterialByName("holomat")
     holocone.material = holomat
-  
    
     var iconplane = BABYLON.MeshBuilder.CreatePlane("iconplane", {}, scene);
     iconplane.parent = rotator
     
     iconplane.scaling = new BABYLON.Vector3(0.9,.9,.9);
     
-
     /* animation */
     var animationCore = new BABYLON.Animation(name + "_anim", 
         "material.emissiveColor", 30, BABYLON.Animation.ANIMATIONTYPE_COLOR3, 

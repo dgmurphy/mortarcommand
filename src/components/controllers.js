@@ -13,7 +13,7 @@ import { updateRounds, updateThePackage } from './mortars.js'
 import { setArtifactDetected } from './agent.js';
 import { updateMines } from './mines.js';
 import { activator_aging, activatorChance, disableMortarBoost } from './activators.js'
-import { TERRAIN_MESH_NAME } from './per-table-constants.js'
+import { TERRAIN_MESH_NAME, HAS_WATER, WATERBOX } from './per-table-constants.js'
 
 
 
@@ -92,7 +92,6 @@ export function startAgentAnim(scene, handleUpdateGUIinfo) {
     
         frameCounter += 1
         modeCheckCounter += 1
-        //scene.addAgentCounter += 1
        
     })
     // ************** Game/Render loop done ***********************************
@@ -126,7 +125,7 @@ export function drive(agentInfo) {
     // The inclineCoeff increaes the delta-s increment when going
     //  downhill, and in decreases it going up hill. A sort of
     // "Velocity" based on slope of terrian.
-    let inclineCoeff   // TODO make this GUI configurable
+    let inclineCoeff    
 
     if (theta < 45)
         inclineCoeff = 1    // steep downhill gets max velocity
@@ -141,14 +140,10 @@ export function drive(agentInfo) {
     
     // create a distance increment
     let ds = inclineCoeff * r
-    //console.log("ds: " + ds)
-
-    // size particle trail
-    //let particlePower = 100   // TODO GUI control
-    //particles.maxEmitPower = particlePower * ds
 
     // colorize & size particle trail
-    colorizeParticles(agentPos, particles, ds)
+    if (HAS_WATER)
+        colorizeParticles(agentPos, particles, ds)
 
     // Keep the agent inside terrian extents
     let testx = agentPos.x + ds * hvecx
@@ -221,16 +216,11 @@ function colorizeParticles(agentPos, particles, ds) {
 
 function isOverWater(agentPos) {
 
-    let waterBox = {
-        xMax: 12,
-        xMin: -4,
-        zMax: 8,
-        zMin: -11.5
-    }
-
-    // TODO Contants for water locations
-    if ((agentPos.x < waterBox.xMax) &&
-        (agentPos.x > waterBox.xMin)) {
+    
+    if ((agentPos.x < WATERBOX.xMax) &&
+        (agentPos.x > WATERBOX.xMin) &&
+        (agentPos.z < WATERBOX.zMax) &&
+        (agentPos.z > WATERBOX.zMin)) {
             return true
         }
 

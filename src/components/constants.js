@@ -105,7 +105,6 @@ export const GAME_LEVELS = [
  ]
 
 
-// TODO Use a function to calculate agent speed based on health
 export const AGENT_MAX_SPEED = 0.3
 export const AGENT_MIN_SPEED = 0.15
 export const AGENT_SIZE  = 1.3  
@@ -208,7 +207,6 @@ export const GUN_POSITION = {
 export const BLAST_ALPHA = 0.9
 export const MORTAR_BLAST_RADIUS_START = 1
 export const MORTAR_BLAST_LIFE = 10
-//export var BLAST_DAMAGE_COEFF = 3  add to scene instead
 
 export const GUN_BLAST_RADIUS_START = 0.3
 export const GUN_BLAST_LIFE = 8
@@ -225,8 +223,6 @@ export const GAME_PHASES = {
 
 // points to load the heavy mortar
 export const PACKAGE_POINTS_THRESH = 12000
-
-
 
 export  const AGENT_TRAIL_COLOR1 =  [.5, .5, 0.3, 1.0]
 export  const AGENT_TRAIL_COLOR2 =  [.4, .4, 0.2, 1.0]

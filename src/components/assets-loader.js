@@ -108,15 +108,10 @@ export function loadAssets(scene, updateAssetStatus) {
 
     terrainTask.onSuccess = function(task) {
 
-      //console.log('task successful', task)
-      //console.log('Loaded meshes: ', task.loadedMeshes)
-
       let newMeshes = task.loadedMeshes
 
       // bjs is left handed coords, gltf is right handed
-      newMeshes[0].scaling = new  BABYLON.Vector3(1, 1, -1);  
-
-      console.log(MC_TABLE_XFORM)
+      newMeshes[0].scaling = new  BABYLON.Vector3(1, 1, -1); 
 
       //Looks like mesh 0 is the base box
       newMeshes[0].scaling = new  BABYLON.Vector3(
@@ -140,10 +135,7 @@ export function loadAssets(scene, updateAssetStatus) {
         vertex_data.normals[i] *= -1;
       }
 
-      //vertex_data.applyToMesh(terrain);
-
       terrain.computeWorldMatrix(true); 
-
 
       terrain.actionManager = new BABYLON.ActionManager(scene);
             

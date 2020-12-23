@@ -259,7 +259,6 @@ export function addRound(scene) {
 
     let name = "round_" + scene.nextRoundId
     let meshes = makeRound(name, scene)
-    //meshes.body.position = new BABYLON.Vector3(0, 5 + scene.nextRoundId, 0)
 
     let round = {
         name: name,
@@ -272,7 +271,7 @@ export function addRound(scene) {
         blastExpansionVelocity: .2,
         detonationFrame: 0,
         blastAge: 0,
-        blastLife: 10,    // TODO smaller for bullets
+        blastLife: 10,     
         meshes: meshes,
         trajectory: {heading: 0, y0: 0, vy:0, g: 0, t: 0, gunYinc: 0}
     }
@@ -311,7 +310,6 @@ function makeAgent(name, health, position, scene) {
     mesh.position = position
 
     // Create a particle system
-    //var particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
     var particleSystem = new BABYLON.GPUParticleSystem(name + "_particles", { capacity: 600 }, scene);
 
     let colors = {
@@ -382,8 +380,6 @@ function makeAgent(name, health, position, scene) {
             }
 
 }
-
-
 
 
 export function addAgent(scene, health, position, heading) {

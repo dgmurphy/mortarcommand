@@ -15,3 +15,12 @@ export const MC_LIGHT1_INTENSITY = 1
 export const MC_LIGHT2_POS = [-1, 3.4, 4]
 export const MC_LIGHT2_INTENSITY = 1
 export const CHANGE_LIGHT_ON_BLAST = true
+
+export const HAS_WATER = false
+
+export const WATERBOX = {
+    xMax: 12,
+    xMin: -4,
+    zMax: 8,
+    zMin: -11.5
+}
